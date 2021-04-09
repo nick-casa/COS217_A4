@@ -1,0 +1,31 @@
++run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Starting program: /u/nc16/A4/A4/1BDT/bdtBad1 
+
+Breakpoint 4, BDT_insertPath (path=0x403620 "a/b/c") at bdtBad1.c:320
+/u/cos217/Assignment4/bdtBad1.c:320:8186:beg:0x402198
++next
+/u/cos217/Assignment4/bdtBad1.c:322:8212:beg:0x4021c4
++next
+/u/cos217/Assignment4/bdtBad1.c:323:8246:beg:0x4021d0
++print path
+$8 = 0x403620 "a/b/c"
++print curr
+$9 = (Node_T) 0x0
++break BDT_insertRestOfPath
+Note: breakpoint 5 also set at pc 0x401fac.
+Breakpoint 7 at 0x401fac: file bdtBad1.c, line 237.
++next
+
+Breakpoint 5, BDT_insertRestOfPath (path=0x403620 "a/b/c", parent=0x0) at bdtBad1.c:237
+/u/cos217/Assignment4/bdtBad1.c:237:6275:beg:0x401fac
++next
+/u/cos217/Assignment4/bdtBad1.c:238:6300:beg:0x401fb4
++next
+/u/cos217/Assignment4/bdtBad1.c:241:6361:beg:0x401fb8
++next
+/u/cos217/Assignment4/bdtBad1.c:245:6422:beg:0x401fc0
++print curr
+$10 = (Node_T) 0x0
++print root
+$11 = (Node_T) 0x0

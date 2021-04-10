@@ -77,7 +77,12 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
 
 
       for(c = 0; c < Node_getNumChildren(n); c++){
-         Node_T child = Node_getChild(n, c);
+          Node_T child = Node_getChild(n, c);
+         if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
+             fprintf(stderr, "Parent of child is not current node.\n");
+             return FALSE;
+         }
+
          if(child == NULL){
              fprintf(stderr, "Null Child TEST.\n");
              return FALSE;

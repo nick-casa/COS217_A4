@@ -28,7 +28,7 @@ int main(void) {
      and toString should return the empty string.*/
   assert(BDT_init() == SUCCESS);
   assert(BDT_containsPath("a/b/c") == FALSE);
-  assert((temp = BDT_toString()) != NULL);
+
   assert(!strcmp(temp,""));
   free(temp);
 

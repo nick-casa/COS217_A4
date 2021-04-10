@@ -3,7 +3,7 @@ Assignment 4 readme File
 ------------------------------------------------------------------------
 Student 1: What is your name?
 
-
+Nickolas Casalinuovo
 
 ------------------------------------------------------------------------
 Student 2: What is your name?
@@ -13,7 +13,7 @@ Student 2: What is your name?
 ------------------------------------------------------------------------
 How many late days are you using on this assignment?
 
-
+0
 
 ------------------------------------------------------------------------
 Student 1: What authorized sources of information did you use to
@@ -120,24 +120,29 @@ the error manifests itself or is "noticed" by the client.
 
       Executable         Function with the underlying error
 ===============================================================
-         ./bdtBad1        
+         ./bdtBad1        BDT_insertRestOfPath()
 ---------------------------------------------------------------
-         ./bdtBad2        
+         ./bdtBad2        BDT_newNode()
 ---------------------------------------------------------------
-         ./bdtBad3        
+         ./bdtBad3        BDT_unlinkParentToChild()
 ===============================================================
 
 For bdtBad4, you do not have to find the bug. Instead, indicate what
 is different about trying to debug this executable in gdb versus the
 other three:
-
-
+r
+The letters in front correspond to the value of the pointer.
+We think it has something to do with remove
 
 For bdtBad5, you do not have to find the bug. Instead, indicate one
 hypothesis for how the program could crash within the DynArray module,
 which we promise is itself correct:
 
-
+In the program's toString function, the DynArray is being created with
+a size of count+1, which is larger than the underlying node
+representation. Then, when the in order traversal function is called
+on a set of n elements, the uLength of the DynArray is n+1, which causes
+overflow.
 
 ------------------------------------------------------------------------
 What are your critiques of the given DT implementations, as

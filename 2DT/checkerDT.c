@@ -16,6 +16,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    const char* ppath;
    const char* rest;
    size_t i;
+   Node_T child;
    size_t c;
    boolean found = FALSE;
 
@@ -29,16 +30,6 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
    if(parent != NULL) {
       npath = Node_getPath(n);
-
-       for(c = 0; c < Node_getNumChildren(n); c++){
-           if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent,c)))==0){
-               found=TRUE;
-           }
-       }
-      if(found == FALSE && Node_getNumChildren(n) != 0){
-          fprintf(stderr, "Child of Parent is not current node.\n");
-          return FALSE;
-      }
 
 
       /* Sample check that parent's path must be prefix of n's path */
@@ -62,6 +53,21 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          fprintf(stderr, "C's path has grandchild of P's path\n");
          return FALSE;
       }
+
+
+      for(c = 0; c < Node_getNumChildren(n); c++){
+          if((child = Node_getChild(parent,c))!=NULL){
+              if(strcmp(Node_getPath(n),Node_getPath(child))==0){
+                  found=TRUE;
+              }
+          }
+      }
+      if(found == FALSE && Node_getNumChildren(n) != 0){
+          fprintf(stderr, "Child of Parent is not current node.\n");
+          return FALSE;
+      }
+
+
 
 
    }

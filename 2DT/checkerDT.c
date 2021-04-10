@@ -138,7 +138,11 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
    /* Check that the amount of nodes is equal to the count */
    printf("Num Nodes: %i",(int)numNodes);
    printf("Count: %i",(int)count-1);
-    if(numNodes != count-1) {
+
+   if(count == 0 && numNodes == 1){
+       return TRUE;
+   }
+   else if (numNodes != count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;
    }

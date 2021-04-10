@@ -44,11 +44,17 @@ boolean CheckerDT_Node_isValid(Node_T n) {
       ppath = Node_getPath(parent);
       i = strlen(ppath);
       if(strncmp(npath, ppath, i)) {
-         fprintf(stderr, "P's path is not a prefix of C's path\n");
-         return FALSE;
+          fprintf(stderr, "P's path is not a prefix of C's path\n");
+          return FALSE;
       }
+
+      if (i > strlen(npath)) {
+          fprintf(stderr, "P's path longer than C's path\n");
+          return FALSE;
+      }
+
       /* Sample check that n's path after parent's path + '/'
-         must havee no further '/' characters */
+         must have no further '/' characters */
       rest = npath + i;
       rest++;
       if(strstr(rest, "/") != NULL) {

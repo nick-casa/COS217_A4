@@ -28,6 +28,11 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    if(parent != NULL) {
       npath = Node_getPath(n);
 
+      if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent)))){
+           fprintf(stderr, "Parent of child is not current node.\n");
+           return FALSE;
+       }
+
       /* Sample check that parent's path must be prefix of n's path */
       ppath = Node_getPath(parent);
       i = strlen(ppath);

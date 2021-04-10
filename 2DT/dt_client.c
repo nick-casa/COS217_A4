@@ -20,19 +20,14 @@ int main(void) {
      and destroy operations should return INITIALIZATION_ERROR, and
      containsPath should return FALSE for any non-NULL argument, and
      toString should return NULL. */
-    printf("-----1------");
   assert(DT_insertPath("a/b/c") == INITIALIZATION_ERROR);
-    printf("-----2------");
   assert(DT_containsPath("a/b/c") == FALSE);
-    printf("-----3------");
   assert((temp = DT_toString()) == NULL);
-    printf("-----4------");
 
   /* After initialization, the data structure is empty, so
      containsPath should still return FALSE for any non-NULL string,
      and toString should return the empty string.*/
   assert(DT_init() == SUCCESS);
-    printf("-----5------");
   assert(DT_containsPath("a/b/c") == FALSE);
   assert((temp = DT_toString()) != NULL);
   assert(!strcmp(temp,""));

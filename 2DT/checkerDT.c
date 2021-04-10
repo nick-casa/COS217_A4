@@ -106,7 +106,7 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
     size_t numNodes;
     boolean treeIsValid;
 
-    numNodes = 0;
+    numNodes = 1;
     /* Sample check on a top-level data structure invariant:
        if the DT is not initialized, its count should be 0. */
     if (!isInit) {
@@ -136,7 +136,9 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
    treeIsValid = CheckerDT_treeCheck(root, &numNodes);
    if(!treeIsValid) return FALSE;
    /* Check that the amount of nodes is equal to the count */
-   if(numNodes != count) {
+   printf("Num Nodes: %zu",numNodes);
+   printf("Count: %zu",count);
+    if(numNodes != count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;
    }

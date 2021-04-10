@@ -1,0 +1,32 @@
++run
+Starting program: /u/ac63/A4/1BDT/bdtBad2 
+
+Program received signal SIGSEGV, Segmentation fault.
+0x0000ffffbe646104 in strcat () from /lib64/libc.so.6
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
++where
+#0  0x0000ffffbe646104 in strcat () from /lib64/libc.so.6
+#1  0x0000000000401be0 in BDT_newNode (parent=0x0, dir=0x430050 "a") at bdtBad2.c:75
+#2  0x0000000000402028 in BDT_insertRestOfPath (path=0x4035c0 "a/b/c", parent=0x0) at bdtBad2.c:263
+#3  0x0000000000402178 in BDT_insertPath (path=0x4035c0 "a/b/c") at bdtBad2.c:316
+#4  0x000000000040283c in main () at bdt_client.c:40
++break BDT_newNode
+Breakpoint 1 at 0x401b40: file bdtBad2.c, line 64.
++run
+The program being debugged has been started already.
+Start it from the beginning? (y or n) Starting program: /u/ac63/A4/1BDT/bdtBad2 
+
+Breakpoint 1, BDT_newNode (parent=0x0, dir=0x430050 "a") at bdtBad2.c:64
+/u/cos217/Assignment4/bdtBad2.c:64:1914:beg:0x401b40
++next
+/u/cos217/Assignment4/bdtBad2.c:66:1939:beg:0x401b6c
++next
+/u/cos217/Assignment4/bdtBad2.c:67:1977:beg:0x401b78
++next
+/u/cos217/Assignment4/bdtBad2.c:70:2016:beg:0x401b8c
++next
+/u/cos217/Assignment4/bdtBad2.c:75:2113:beg:0x401bd0
++print dir
+$1 = 0x430050 "a"
++print new->path
+$2 = 0x0

@@ -16,7 +16,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    const char* ppath;
    const char* rest;
    size_t i;
-   unsigned int c;
+   size_t c;
    boolean found = FALSE;
 
    /* Sample check: a NULL pointer is not a valid node */
@@ -31,7 +31,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
       npath = Node_getPath(n);
 
       for(c = 0; c < Node_getNumChildren(n); c++){
-          if(Node_hasChild(parent,npath)){
+          if(Node_hasChild(parent,npath,c)){
               if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent,c)))==0){
                    found=TRUE;
               }

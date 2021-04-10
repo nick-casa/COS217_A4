@@ -37,7 +37,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
                found=TRUE;
            }
       }
-      if(found == FALSE){
+      if(found == FALSE && Node_getNumChildren(n) != 0){
           fprintf(stderr, "Child of Parent is not current node.\n");
           return FALSE;
       }

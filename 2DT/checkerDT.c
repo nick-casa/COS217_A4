@@ -75,32 +75,34 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           return FALSE;
       }
 
-
+      if(Node_getNumChildren(n) == 0 && Node_getChild(n, 0) !x= NULL) {
+          fprintf(stderr, "Node'");
+          return FALSE;
+      }
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
-         if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
+
+          if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
              fprintf(stderr, "Parent of child is not current node.\n");
              return FALSE;
-         }
-
-         if(child == NULL){
-             fprintf(stderr, "Null Child TEST.\n");
-             return FALSE;
-         }
-         if(c > 0){
-             Node_T lastChild = Node_getChild(n, c-1);
-             if(strcmp(Node_getPath(lastChild), Node_getPath(child)) > 0){
-                 fprintf(stderr, "Children are not in alphabetical order.\n");
-                 return FALSE;
-             }
-         }
-
-         /* if recurring down one subtree results in a failed check
-            farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(child, numNodes)){
-             fprintf(stderr, "Failed recurring down subtree\n");
-             return FALSE;
-         }
+          }
+          if(child == NULL){
+              fprintf(stderr, "Null Child TEST.\n");
+              return FALSE;
+          }
+          if(c > 0){
+              Node_T lastChild = Node_getChild(n, c-1);
+              if(strcmp(Node_getPath(lastChild), Node_getPath(child)) > 0){
+                  fprintf(stderr, "Children are not in alphabetical order.\n");
+                  return FALSE;
+              }
+          }
+          /* if recurring down one subtree results in a failed check
+             farther down, passes the failure back up immediately */
+          if(!CheckerDT_treeCheck(child, numNodes)){
+              fprintf(stderr, "Failed recurring down subtree\n");
+              return FALSE;
+          }
       }
    }
    return TRUE;

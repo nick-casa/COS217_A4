@@ -76,7 +76,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
       }
 
       if(Node_getNumChildren(n) == 0 && Node_getChild(n, 0) !x= NULL) {
-          fprintf(stderr, "Node'");
+          fprintf(stderr, "Nod");
           return FALSE;
       }
       for(c = 0; c < Node_getNumChildren(n); c++){
@@ -132,6 +132,9 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
         if (root != NULL && count == 0) {
             fprintf(stderr, "Initialized, has a node but count is 0\n");
             return FALSE;
+        }
+        if (root != NULL) {
+            numNodes = 1;
         }
         if (root == NULL && count != 0) {
             fprintf(stderr, "Initialized, has no nodes but count isn't 0\n");

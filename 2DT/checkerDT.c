@@ -65,9 +65,8 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 */
 static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
    size_t c;
-    (*numNodes)++;
+   (*numNodes)++;
    if(n != NULL) {
-
 
       /* Sample check on each non-root node: node must be valid */
       /* If not, pass that failure back up immediately */
@@ -135,10 +134,6 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
             fprintf(stderr, "Initialized, has a node but count is 0\n");
             return FALSE;
         }
-        /*
-        if (root != NULL) {
-            numNodes = 1;
-        }*/
         if (root == NULL && count != 0) {
             fprintf(stderr, "Initialized, has no nodes but count isn't 0\n");
             return FALSE;
@@ -150,8 +145,8 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
    if(!treeIsValid) return FALSE;
    /* Check that the amount of nodes is equal to the count */
 
-    printf("NumNodes: %i",(int)numNodes);
-    printf("Count: %i",(int)count);
+    printf("NumNodes: %i \n",(int)numNodes);
+    printf("Count: %i \n",(int)count);
 
     if(count == 0 && numNodes == 1){
        return TRUE;

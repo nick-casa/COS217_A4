@@ -57,7 +57,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
       for(c = 0; c < Node_getNumChildren(n); c++){
           if((child = Node_getChild(parent,c))!=NULL){
-              if(strcmp(Node_getPath(n),Node_getPath(child))==0){
+              if(strcmp(npath,Node_getPath(child))==0){
                   found=TRUE;
               }
           }

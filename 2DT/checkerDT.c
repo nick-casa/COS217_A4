@@ -16,6 +16,8 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    const char* ppath;
    const char* rest;
    size_t i;
+   int c;
+   boolean found = FALSE;
 
    /* Sample check: a NULL pointer is not a valid node */
    if(n == NULL) {
@@ -28,10 +30,15 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    if(parent != NULL) {
       npath = Node_getPath(n);
 
-      if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent)))){
-           fprintf(stderr, "Parent of child is not current node.\n");
-           return FALSE;
-       }
+      for(c = 0; c < Node_getNumChildren(n); c++){
+           if(strcmp(npath,Node_getPath(Node_getChild(parent,c)))){
+               found=TRUE;
+           }
+      }
+      if(!found){
+          fprintf(stderr, "Child of Parent is not current node.\n");
+          return FALSE;
+      }
 
       /* Sample check that parent's path must be prefix of n's path */
       ppath = Node_getPath(parent);
@@ -80,7 +87,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           return FALSE;
       }
 
-      if(Node_getNumChildren(n) == 0 && Node_getChild(n, 0) != NULL) {
+      if(Node_getNumChildren(n) == 0 && Node_hasChild(n) != 0) {
           fprintf(stderr, "Node has children even though num children isn't 0\n");
           return FALSE;
       }

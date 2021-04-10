@@ -66,7 +66,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
    size_t c;
    if(n != NULL) {
-       *numNodes++;
+       (*numNodes)++;
 
       /* Sample check on each non-root node: node must be valid */
       /* If not, pass that failure back up immediately */

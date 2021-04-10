@@ -75,10 +75,11 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           return FALSE;
       }
 
-      if(Node_getNumChildren(n) == 0 && Node_getChild(n, 0) !x= NULL) {
-          fprintf(stderr, "Nod");
+      if(Node_getNumChildren(n) == 0 && Node_getChild(n, 0) != NULL) {
+          fprintf(stderr, "Node has children even though num children isn't 0\n");
           return FALSE;
       }
+
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
 

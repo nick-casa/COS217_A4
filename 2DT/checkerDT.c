@@ -36,7 +36,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          return FALSE;
       }
       /* Sample check that n's path after parent's path + '/'
-         must have no further '/' characters */
+         must havee no further '/' characters */
       rest = npath + i;
       rest++;
       if(strstr(rest, "/") != NULL) {
@@ -78,9 +78,12 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
 
       for(c = 0; c < Node_getNumChildren(n); c++){
          Node_T child = Node_getChild(n, c);
+         if(child == NULL){
+             fprintf(stderr, "Null Child TEST.\n");
+             return FALSE;
+         }
          if(c > 0){
              Node_T lastChild = Node_getChild(n, c-1);
-             printf("%s",Node_getPath(lastChild));
              if(strcmp(Node_getPath(lastChild), Node_getPath(child)) > 0){
                  fprintf(stderr, "Children are not in alphabetical order.\n");
                  return FALSE;
@@ -106,11 +109,16 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
     numNodes = 0;
     /* Sample check on a top-level data structure invariant:
        if the DT is not initialized, its count should be 0. */
-    if (!isInit)
+    if (!isInit) {
         if (count != 0) {
             fprintf(stderr, "Not initialized, but count is not 0\n");
             return FALSE;
         }
+        if (root != NULL) {
+            fprintf(stderr, "Not initialized, but root is not NULL\n");
+            return FALSE;
+        }
+    }
 
     /* Check on when DT is in an initialized state */
     if (isInit) {

@@ -171,6 +171,9 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
    if(!treeIsValid) return FALSE;
    /* Check that the amount of nodes is equal to the count */
 
+    if(count == 0 && numNodes == 1){
+       return TRUE;
+   }
     else if (numNodes != count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;

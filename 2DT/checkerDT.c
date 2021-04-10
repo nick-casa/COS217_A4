@@ -89,7 +89,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
 
          /* if recurring down one subtree results in a failed check
             farther down, passes the failure back up immediately */
-         if(!CheckerDT_treeCheck(child)){
+         if(!CheckerDT_treeCheck(child, numNodes)){
              fprintf(stderr, "Failed recurring down subtree\n");
              return FALSE;
          }
@@ -100,8 +100,10 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
 
 /* see checkerDT.h for specification */
 boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
-    size_t *numNodes;
+    size_t numNodes;
     boolean treeIsValid;
+
+    numNodes = 0;
     /* Sample check on a top-level data structure invariant:
        if the DT is not initialized, its count should be 0. */
     if (!isInit)
@@ -123,10 +125,10 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
     }
 
    /* Now checks invariants recursively at each node from the root. */
-   treeIsValid = CheckerDT_treeCheck(root, numNodes);
+   treeIsValid = CheckerDT_treeCheck(root, &numNodes);
    if(!treeIsValid) return FALSE;
    /* Check that the amount of nodes is equal to the count */
-   if(*numNodes != count) {
+   if(numNodes != count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;
    }

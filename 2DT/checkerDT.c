@@ -29,19 +29,17 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
    if(parent != NULL) {
       npath = Node_getPath(n);
-      /*
+
        for(c = 0; c < Node_getNumChildren(n); c++){
-          if(Node_hasChild(parent,npath,&c)){
-              if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent,c)))==0){
-                   found=TRUE;
-              }
-          }
-      }
+           if(strcmp(Node_getPath(n),Node_getPath(Node_getChild(parent,c)))==0){
+               found=TRUE;
+           }
+       }
       if(found == FALSE && Node_getNumChildren(n) != 0){
           fprintf(stderr, "Child of Parent is not current node.\n");
           return FALSE;
       }
-       */
+
 
       /* Sample check that parent's path must be prefix of n's path */
       ppath = Node_getPath(parent);

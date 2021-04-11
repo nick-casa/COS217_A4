@@ -28,7 +28,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
    parent = Node_getParent(n);
     if (Node_getPath(n) == NULL) {
-        fprintf(stderr, "Node has no path");
+        fprintf(stderr, "Node has no path\n");
         return FALSE;
     }
 
@@ -38,7 +38,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
        ppath = Node_getPath(parent);
 
        if (npath==NULL || ppath == NULL) {
-           fprintf(stderr, "Node has no path");
+           fprintf(stderr, "Node has no path\n");
            return FALSE;
        }
 
@@ -107,16 +107,17 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           return FALSE;
       }
       */
+       if (Node_getNumChildren(n) >= 1){
+           if(Node_getChild(n, 0) == NULL){
+               fprintf(stderr, "Child at wrong location. \n");
+               return FALSE;
+           }
+       }
 
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
 
-          if (Node_getNumChildren(n) >= 1){
-              if(Node_getChild(n, 0) == NULL){
-                  fprintf(stderr, "Child at wrong location. \n");
-                  return FALSE;
-              }
-          }
+
           /* if(Node_getParent(child)==NULL){
               fprintf(stderr, "Node is hanging");
               return FALSE;
@@ -177,23 +178,24 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
             fprintf(stderr, "Initialized, has no nodes but count isn't 0\n");
             return FALSE;
         }
-
-
-
     }
 
-   /* Now checks invariants recursively at each node from the root. */
-   treeIsValid = CheckerDT_treeCheck(root, &numNodes);
-   if(!treeIsValid) return FALSE;
-   /* Check that the amount of nodes is equal to the count */
+    if(Node_getParent(root) != NULL){
+        fprintf(stderr, "Parent of root is not null.\n");
+        return FALSE;
+    }
+    /* Now checks invariants recursively at each node from the root. */
+    treeIsValid = CheckerDT_treeCheck(root, &numNodes);
+    if(!treeIsValid) return FALSE;
+    /* Check that the amount of nodes is equal to the count */
 
     if(count == 0 && numNodes == 1){
        return TRUE;
-   }
+    }
     else if (numNodes != count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;
-   }
+    }
 
-   return TRUE;
+    return TRUE;
 }

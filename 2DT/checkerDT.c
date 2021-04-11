@@ -27,8 +27,8 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    }
 
    parent = Node_getParent(n);
-   if(parent == NULL) {
-       fprintf(stderr, "Parent is NULL\n");
+   if(parent==NULL && Node_getNumChildren(n)==0){
+       fprintf(sterr, "Node is hanging");
        return FALSE;
    }
    if(parent != NULL) {

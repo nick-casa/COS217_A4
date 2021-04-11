@@ -28,14 +28,14 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
    parent = Node_getParent(n);
    if(parent==NULL && Node_getNumChildren(n)==0){
-       fprintf(sterr, "Node is hanging");
+       fprintf(stderr, "Node is hanging");
        return FALSE;
    }
    if(parent != NULL) {
       npath = Node_getPath(n);
 
       if (npath == NULL) {
-          fprintf(sterr, "Node has no path");
+          fprintf(stderr, "Node has no path");
           return FALSE;
       }
 

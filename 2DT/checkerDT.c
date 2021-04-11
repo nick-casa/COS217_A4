@@ -34,6 +34,10 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    if(parent != NULL) {
       npath = Node_getPath(n);
 
+      if (npath == NULL) {
+          fprintf(sterr, "Node has no path");
+          return FALSE;
+      }
 
       /* Sample check that parent's path must be prefix of n's path */
       ppath = Node_getPath(parent);
@@ -89,10 +93,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
    size_t c;
    (*numNodes)++;
    if(n != NULL) {
-       if (Node_getParent(n) == NULL){
-           fprintf(stderr, "C doesn't have a parent\n");
-           return FALSE;
-       }
+
       /* Sample check on each non-root node: node must be valid */
       /* If not, pass that failure back up immediately */
       if(!CheckerDT_Node_isValid(n)){

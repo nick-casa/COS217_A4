@@ -54,14 +54,6 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          return FALSE;
       }
 
-       if(Node_getNumChildren(n) == 0 && Node_hasChild(n) != 0) {
-           fprintf(stderr, "Node has children even though num children isn't 0\n");
-           return FALSE;
-       }
-       if(Node_getNumChildren(n) != 0 && Node_hasChild(n) == 0) {
-           fprintf(stderr, "Node has children even though num children isn't 0\n");
-           return FALSE;
-       }
 
       /*
       for(c = 0; c < Node_getNumChildren(parent); c++){

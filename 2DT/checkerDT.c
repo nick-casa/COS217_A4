@@ -117,7 +117,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
              return FALSE;
           }
           if(child == NULL){
-              fprintf(stderr, "Null Child TEST.\n");
+              fprintf(stderr, "Null Child.\n");
               return FALSE;
           }
           if(c > 0){
@@ -170,7 +170,7 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
 
 
         if (Node_getParent(root) != NULL) {
-            fprintf(stderr, "Root has a parent")
+            fprintf(stderr, "Root has a parent");
             return FALSE;
         }
     }

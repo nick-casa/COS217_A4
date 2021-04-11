@@ -107,12 +107,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           return FALSE;
       }
       */
-       if (Node_getNumChildren(n) >= 1){
-           if(Node_getChild(n, 0) == NULL){
-               fprintf(stderr, "Child at wrong location. \n");
-               return FALSE;
-           }
-       }
+
 
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
@@ -122,6 +117,12 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
               fprintf(stderr, "Node is hanging");
               return FALSE;
           } */
+          if (Node_getNumChildren(n) >= 1){
+              if(Node_getChild(n, 0) == NULL){
+                  fprintf(stderr, "Child at wrong location. \n");
+                  return FALSE;
+              }
+          }
 
           if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
              fprintf(stderr, "Parent of child is not current node.\n");

@@ -171,9 +171,15 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
 
     /* Check on when DT is in an initialized state */
     if (isInit) {
-        if (root != NULL && count == 0) {
-            fprintf(stderr, "Initialized, has a node but count is 0\n");
-            return FALSE;
+        if (root != NULL){
+            if (count == 0) {
+                fprintf(stderr, "Initialized, has a node but count is 0\n");
+                return FALSE;
+            }
+            if(Node_getParent(root) != NULL){
+                fprintf(stderr, "Parent of root is not null.\n");
+                return FALSE;
+            }
         }
         if (root == NULL && count != 0) {
             fprintf(stderr, "Initialized, has no nodes but count isn't 0\n");
@@ -181,15 +187,12 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
         }
     }
 
-    if(Node_getParent(root) != NULL){
-        fprintf(stderr, "Parent of root is not null.\n");
-        return FALSE;
-    }
+
     /* Now checks invariants recursively at each node from the root. */
     treeIsValid = CheckerDT_treeCheck(root, &numNodes);
     if(!treeIsValid) return FALSE;
-    /* Check that the amount of nodes is equal to the count */
 
+    /* Check that the amount of nodes is equal to the count */
     if(count == 0 && numNodes == 1){
        return TRUE;
     }

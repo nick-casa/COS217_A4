@@ -54,7 +54,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          return FALSE;
       }
 
-
+      /*
       for(c = 0; c < Node_getNumChildren(parent); c++){
           if((child = Node_getChild(parent,c))!=NULL){
               if(strcmp(npath,Node_getPath(child))==0){
@@ -66,7 +66,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
           fprintf(stderr, "Child of Parent is not current node.\n");
           return FALSE;
       }
-
+       */
 
 
 

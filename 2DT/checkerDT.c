@@ -80,10 +80,10 @@ boolean CheckerDT_Node_isValid(Node_T n) {
 
 
    }
-  /* else if (parent == NULL){
+  else if (parent == NULL){
        fprintf(stderr, "C doesn't have a parent\n");
        return FALSE;
-   } */
+  }
 
    return TRUE;
 }

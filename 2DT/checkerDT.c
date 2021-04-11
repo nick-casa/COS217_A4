@@ -31,10 +31,10 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    if(parent != NULL) {
       npath = Node_getPath(n);
 
-      if (npath == NULL) {
+      /*if (npath == NULL) {
           fprintf(stderr, "Node has no path");
           return FALSE;
-      }
+      } */
 
       /* Sample check that parent's path must be prefix of n's path */
       ppath = Node_getPath(parent);
@@ -107,10 +107,10 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
 
-          if(Node_getParent(child)==NULL){
+          /* if(Node_getParent(child)==NULL){
               fprintf(stderr, "Node is hanging");
               return FALSE;
-          }
+          } */
 
           if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
              fprintf(stderr, "Parent of child is not current node.\n");
@@ -165,6 +165,12 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
         }
         if (root == NULL && count != 0) {
             fprintf(stderr, "Initialized, has no nodes but count isn't 0\n");
+            return FALSE;
+        }
+
+
+        if (Node_getParent(root) != NULL) {
+            fprintf(stderr, "Root has a parent")
             return FALSE;
         }
     }

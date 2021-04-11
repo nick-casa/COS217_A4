@@ -62,7 +62,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
               }
           }
       }
-      if(found == FALSE && Node_getNumChildren(n) != 0){
+      if(found == FALSE && Node_getNumChildren(parent) != 0){
           fprintf(stderr, "Child of Parent is not current node.\n");
           return FALSE;
       }

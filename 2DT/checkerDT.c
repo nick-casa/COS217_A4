@@ -27,17 +27,21 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    }
 
    parent = Node_getParent(n);
+    if (Node_getPath(n) == NULL) {
+        fprintf(stderr, "Node has no path");
+        return FALSE;
+    }
 
    if(parent != NULL) {
-      npath = Node_getPath(n);
+       npath = Node_getPath(n);
+        /* Sample check that parent's path must be prefix of n's path */
+       ppath = Node_getPath(parent);
 
-      /*if (npath == NULL) {
-          fprintf(stderr, "Node has no path");
-          return FALSE;
-      } */
+       if (npath==NULL || ppath == NULL) {
+           fprintf(stderr, "Node has no path");
+           return FALSE;
+       }
 
-      /* Sample check that parent's path must be prefix of n's path */
-      ppath = Node_getPath(parent);
       i = strlen(ppath);
       if(strncmp(npath, ppath, i)) {
           fprintf(stderr, "P's path is not a prefix of C's path\n");

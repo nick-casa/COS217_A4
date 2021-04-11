@@ -27,10 +27,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    }
 
    parent = Node_getParent(n);
-   if(parent==NULL && Node_getNumChildren(n)==0){
-       fprintf(stderr, "Node is hanging");
-       return FALSE;
-   }
+
    if(parent != NULL) {
       npath = Node_getPath(n);
 
@@ -109,6 +106,11 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
 
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
+
+          if(Node_getParent(child)==NULL){
+              fprintf(stderr, "Node is hanging");
+              return FALSE;
+          }
 
           if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
              fprintf(stderr, "Parent of child is not current node.\n");

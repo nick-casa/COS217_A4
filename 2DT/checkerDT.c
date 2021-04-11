@@ -107,6 +107,12 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
       for(c = 0; c < Node_getNumChildren(n); c++){
           Node_T child = Node_getChild(n, c);
 
+          if (Node_getNumChildren(n) >= 1){
+              if(Node_getChild(n, 0) == NULL){
+                  fprintf(stderr, "Child at wrong location. \n");
+                  return FALSE;
+              }
+          }
           /* if(Node_getParent(child)==NULL){
               fprintf(stderr, "Node is hanging");
               return FALSE;
@@ -183,5 +189,6 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
        fprintf(stderr, "The number of nodes is not equal to the count.\n");
        return FALSE;
    }
+
    return TRUE;
 }

@@ -128,7 +128,7 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           }
           if(c > 0){
               Node_T lastChild = Node_getChild(n, c-1);
-              if(strcmp(Node_getPath(lastChild), Node_getPath(child)) > 0){
+              if(strcmp(Node_getPath(lastChild), Node_getPath(child)) >= 0){
                   fprintf(stderr, "Children are not in alphabetical order.\n");
                   return FALSE;
               }

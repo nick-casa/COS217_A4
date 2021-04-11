@@ -27,7 +27,10 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    }
 
    parent = Node_getParent(n);
-
+   if(parent == NULL) {
+       fprintf(stderr, "Parent is NULL\n");
+       return FALSE;
+   }
    if(parent != NULL) {
       npath = Node_getPath(n);
 
@@ -54,7 +57,6 @@ boolean CheckerDT_Node_isValid(Node_T n) {
          return FALSE;
       }
 
-
       /*
       for(c = 0; c < Node_getNumChildren(parent); c++){
           if((child = Node_getChild(parent,c))!=NULL){
@@ -68,9 +70,6 @@ boolean CheckerDT_Node_isValid(Node_T n) {
           return FALSE;
       }
        */
-
-
-
    }
 
 

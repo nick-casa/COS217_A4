@@ -150,12 +150,12 @@ What are your critiques of the given DT implementations, as
 specified in Step 2.5?
 
 Node_hasChild() uses binary search to find a node. However, it is not
-used in dtGood, and it is used once in nodeGood. In dtGood, instead,
-it checks if Node_getChild() is NULL. This is faster because the
-underlying DynArray is represented with an expanding array, so
+used in dtGood.c, and it is used once in nodeGood.c. In dtGood.c,
+instead, it checks if Node_getChild() is NULL. This is faster because
+the underlying DynArray is represented with an expanding array, so
 Node_getChild() of a childID is constant in time. So, in the one case
 where nodeGood.c utilizes the function, the same work around that is used
-in dtGood.c could be used.
+in dtGood.c could be used, rendering Node_hasChild() useless.
 
 DT_traversePath is redundant. Every time it is used, it can be swapped
 for a single function call to DT_TraversePathFrom(path, root);

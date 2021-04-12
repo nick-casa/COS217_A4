@@ -160,9 +160,16 @@ in dtGood.c could be used, rendering Node_hasChild() useless.
 DT_traversePath is redundant. Every time it is used, it can be swapped
 for a single function call to DT_TraversePathFrom(path, root);
 
-In nodeGood.c, Node_linkChild and Node_unlinkChild can
+In nodeGood.c, can create a static function to call the asserts
+used in Node_linkChild and Node_unlinkChild, since the parent and child
+nodes are checked for validity multiple times
 
-DT_removePath calls DT_removePathAt, DT_removePathFrom
+DT_removePath calls DT_removePathAt which calls DT_removePathFrom.
+DT_removePath from gets called in two different places within the code,
+but it can be replaced by the contents in one line:
+if(curr != NULL) count -= Node_destroy(curr);
+
+In nodeGood.c, should remove dead code above get_Path()
 
 
 ------------------------------------------------------------------------

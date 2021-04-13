@@ -347,7 +347,6 @@ int  Node_unlinkChild(Node_T parent, Node_T child) {
 
    assert(parent != NULL);
    assert(child != NULL);
-   assertNodes(parent,child);
 
    if(parent->type == ISFILE) return PARENT_CHILD_ERROR;
 

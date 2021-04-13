@@ -232,7 +232,7 @@ static int FT_rmPathAt(char* path, Node_T curr) {
         else
             Node_unlinkChild(parent, curr);
 
-        if(curr != NULL) count -= Node_destroy(curr, getType(curr));
+        count -= Node_destroy(curr, getType(curr));
         return SUCCESS;
     }
     else
@@ -358,14 +358,22 @@ int FT_stat(char *path, boolean *type, size_t *length){
 
 static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
     size_t c;
+    size_t a;
+    Node_T file;
 
     assert(d != NULL);
 
     if(n != NULL) {
         (void) DynArray_set(d, i, Node_getPath(n));
         i++;
-        for(c = 0; c < Node_getNumChildren(n); c++)
-            i = FT_preOrderTraversal(Node_getChild(n, c), d, i);
+        for(c = 0; c < Node_getNumDirChildren(n); c++)
+            for(a = 0; a < Node_getNumFileChildren(n); a++){
+                file = Node_getChildFile(n, c);
+                (void) DynArray_set(d, ++i, Node_getPath(file));
+            }
+
+            i = FT_preOrderTraversal(Node_getChildDirectory(n, c), d, i);
+
     }
     return i;
 }

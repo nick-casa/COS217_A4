@@ -469,7 +469,6 @@ char *FT_toString(void){
     size_t totalStrlen = 1;
     char* result = NULL;
 
-    /* assert(CheckerDT_isValid(isInitialized,root,count)); */
 
     if(!isInitialized) return NULL;
 
@@ -481,7 +480,6 @@ char *FT_toString(void){
     result = malloc(totalStrlen);
     if(result == NULL) {
         DynArray_free(nodes);
-        /* assert(CheckerDT_isValid(isInitialized,root,count)); */
         return NULL;
     }
     *result = '\0';
@@ -489,7 +487,6 @@ char *FT_toString(void){
     DynArray_map(nodes, (void (*)(void *, void*)) FT_strcatAccumulate, (void *) result);
 
     DynArray_free(nodes);
-    /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
 }
 

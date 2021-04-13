@@ -6,11 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
-#include <stdio.h>
 
 #include "dynarray.h"
 #include "node.h"
-/* #include "checkerDT.h" */
 
 /*
    A node structure represents a file or a directory in the tree
@@ -80,12 +78,12 @@ static char* Node_buildPath(Node_T n, const char* nodeName) {
 Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t length, nodeType type){
    Node_T new;
 
-    /*assert(parent == NULL || CheckerDT_Node_isValid(parent));*/
+   assert(parent == NULL);
    assert(nodeName != NULL);
 
    new = malloc(sizeof(struct node));
    if(new == NULL) {
-      assert(parent == NULL /*|| CheckerDT_Node_isValid(parent)*/);
+      assert(parent == NULL);
       return NULL;
    }
 
@@ -93,7 +91,7 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
 
    if(new->path == NULL) {
       free(new);
-      assert(parent == NULL /*|| CheckerDT_Node_isValid(parent)*/);
+      assert(parent == NULL);
       return NULL;
    }
 
@@ -112,19 +110,19 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
        if(new->fileChildren == NULL) {
           free(new->path);
           free(new);
-          assert(parent == NULL /* || CheckerDT_Node_isValid(parent)*/);
+          assert(parent == NULL);
           return NULL;
        }
        new->dirChildren = DynArray_new(0);
        if(new->dirChildren == NULL) {
            free(new->path);
            free(new);
-           assert(parent == NULL /* || CheckerDT_Node_isValid(parent)*/);
+           assert(parent == NULL);
            return NULL;
        }
    }
 
-   /* assert(parent == NULL || CheckerDT_Node_isValid(parent)); */
+   assert(parent == NULL); */
    /* assert(CheckerDT_Node_isValid(new)); */
    return new;
 }
@@ -164,11 +162,11 @@ const char* Node_getPath(Node_T n) {
    return n->path;
 }
 
-/*   see node.h for specification
-     node1 (b is a directory): a/b/
-     node2 (b is a file): a/b/
-     path names could be same but should return not equal
- */
+/*
+   Compares node1 and node2 based on their paths.
+   Returns <0, 0, or >0 if node1 is less than or
+equal to, or greater than node2, respectively.
+*/
  static int Node_compare(Node_T node1, Node_T node2) {
    assert(node1 != NULL);
    assert(node2 != NULL);
@@ -378,7 +376,6 @@ int Node_addChild(Node_T parent, const char* newNode, void* contents,
 
    assert(parent != NULL);
    assert(newNode != NULL);
-   /* assert(CheckerDT_Node_isValid(parent)); */
 
    /* precautionary */
    if (type == ISFILE)

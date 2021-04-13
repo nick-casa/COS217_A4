@@ -78,12 +78,10 @@ static char* Node_buildPath(Node_T n, const char* nodeName) {
 Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t length, nodeType type){
    Node_T new;
 
-   assert(parent == NULL);
    assert(nodeName != NULL);
 
    new = malloc(sizeof(struct node));
    if(new == NULL) {
-      assert(parent == NULL);
       return NULL;
    }
 
@@ -91,7 +89,6 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
 
    if(new->path == NULL) {
       free(new);
-      assert(parent == NULL);
       return NULL;
    }
 
@@ -110,14 +107,12 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
        if(new->fileChildren == NULL) {
           free(new->path);
           free(new);
-          assert(parent == NULL);
           return NULL;
        }
        new->dirChildren = DynArray_new(0);
        if(new->dirChildren == NULL) {
            free(new->path);
            free(new);
-           assert(parent == NULL);
            return NULL;
        }
    }

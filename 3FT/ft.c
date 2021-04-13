@@ -52,7 +52,7 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
     assert(parent != NULL);
 
     if(Node_linkChild(parent, child) != SUCCESS) {
-        (void) Node_destroy(child, type);
+        (void) Node_destroy(child, getType(child));
         return PARENT_CHILD_ERROR;
     }
 
@@ -99,14 +99,14 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
         else {
             result = FT_linkParentToChild(curr, new);
             if(result != SUCCESS) {
-                (void) Node_destroy(new);
-                (void) Node_destroy(firstNew);
+                (void) Node_destroy(new, getType(new));
+                (void) Node_destroy(firstNew, getType(firstNew));
                 free(copyPath);
                 return result;
             }
         }
         if(new == NULL) {
-            (void) Node_destroy(firstNew);
+            (void) Node_destroy(firstNew, getType(firstNew));
             free(copyPath);
             return MEMORY_ERROR;
         }
@@ -127,7 +127,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
         if(result == SUCCESS)
             count += newCount;
         else
-            (void) Node_destroy(firstNew);
+            (void) Node_destroy(firstNew, getType(firstNew));
 
         return result;
     }
@@ -219,7 +219,7 @@ static int FT_rmPathAt(char* path, Node_T curr) {
         else
             Node_unlinkChild(parent, curr);
 
-        if(curr != NULL) count -= Node_destroy(curr);
+        if(curr != NULL) count -= Node_destroy(curr, getType(curr));
         return SUCCESS;
     }
     else
@@ -282,7 +282,7 @@ int FT_insertFile(char *path, void *contents, size_t length){
     result = FT_linkParentToChild(curr, new);
 
     if(result == SUCCESS) count++;
-    else (void) Node_destroy(new);
+    else (void) Node_destroy(new, getType(new));
 
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;

@@ -59,7 +59,7 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
     return SUCCESS;
 }
 
-static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
+static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* contents, size_t length) {
 
     Node_T curr = parent;
     Node_T firstNew = NULL;
@@ -91,7 +91,12 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
     dirToken = strtok(copyPath, "/");
 
     while(dirToken != NULL) {
-        new = Node_create(dirToken, curr, NULL, 0, ISDIRECTORY);
+        if (type == ISFILE && strtok(NULL,"/") == NULL){
+            new = Node_create(dirToken, curr, contents, length, ISFILE);
+        }
+        else{
+            new = Node_create(dirToken, curr, NULL, 0, ISDIRECTORY);
+        }
         newCount++;
 
         if(firstNew == NULL)
@@ -248,10 +253,8 @@ int FT_rmDir(char *path){
 
 int FT_insertFile(char *path, void *contents, size_t length){
     /* can't insert file if root is NULL */
-    Node_T curr, new;
+    Node_T curr;
     int result;
-    char* copyPath;
-    char* restPath = path;
 
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);

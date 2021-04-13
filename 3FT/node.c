@@ -235,6 +235,7 @@ int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID) {
     if(checker == NULL) {
         return -1;
     }
+    index=0;
     result = DynArray_bsearch(n->dirChildren, checker, &index,
                               (int (*)(const void*, const void*)) Node_compare);
 
@@ -249,7 +250,7 @@ int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID) {
 /* see node.h for specification */
 Node_T Node_getChildDirectory(Node_T n, size_t childID) {
    assert(n != NULL);
-   if (n->type == ISFILE) return 0;
+   if (n->type == ISFILE) return NULL;
 
    if(DynArray_getLength(n->dirChildren) > childID) {
       return DynArray_get(n->dirChildren, childID);
@@ -262,7 +263,7 @@ Node_T Node_getChildDirectory(Node_T n, size_t childID) {
 /* see node.h for specification */
 Node_T Node_getChildFile(Node_T n, size_t childID) {
     assert(n != NULL);
-    if (n->type == ISFILE) return 0;
+    if (n->type == ISFILE) return NULL;
 
     else if(DynArray_getLength(n->fileChildren) > childID) {
         return DynArray_get(n->fileChildren, childID);
@@ -359,7 +360,7 @@ int Node_linkChild(Node_T parent, Node_T child) {
 
 /* see node.h for specification */
 int  Node_unlinkChild(Node_T parent, Node_T child) {
-   size_t i;
+   size_t i = 0;
 
    assert(parent != NULL);
    assert(child != NULL);
@@ -403,7 +404,7 @@ int Node_addChild(Node_T parent, const char* newNode, void* contents,
    /* precautionary */
    if (type == ISFILE)
        new = Node_create(newNode, parent, contents, length, type);
-   else if(type == ISDIRECTORY)
+   else
        new = Node_create(newNode, parent, NULL, 0,  type);
 
    if(new == NULL) {

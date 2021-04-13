@@ -46,7 +46,7 @@ size_t Node_destroy(Node_T n, nodeType type);
   Returns <0, 0, or >0 if node1 is less than,
   equal to, or greater than node2, respectively.
 */
-int Node_compare(Node_T node1, Node_T node2);
+/*int Node_compare(Node_T node1, Node_T node2);*/
 
 /*
    Returns n's path.

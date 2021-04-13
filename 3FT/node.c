@@ -347,10 +347,10 @@ int Node_linkChild(Node_T parent, Node_T child) {
            }
        }
    }
-   else {
-      assertNodes(parent,child);
-      return PARENT_CHILD_ERROR;
-   }
+
+   assertNodes(parent,child);
+   return PARENT_CHILD_ERROR;
+
 }
 
 /* see node.h for specification */

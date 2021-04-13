@@ -133,7 +133,7 @@ void* getFileContents(Node_T n);
 
 size_t getFileLength(Node_T n);
 
-boolean isFile(Node_t n);
+boolean isFile(Node_T n);
 
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength);
 

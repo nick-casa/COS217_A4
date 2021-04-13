@@ -128,9 +128,8 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
             count += newCount;
         else
             (void) Node_destroy(firstNew, getType(firstNew));
-
-        return result;
     }
+    return result;
 }
 
 static boolean contains(char *path, nodeType type){
@@ -260,33 +259,7 @@ int FT_insertFile(char *path, void *contents, size_t length){
     if (root == NULL) return CONFLICTING_PATH;
 
     curr = FT_traversePathFrom(path, root, ISFILE);
-    if(curr == NULL) {
-        if (root != NULL) return CONFLICTING_PATH;
-    }
-    else{
-        if(!strcmp(path, Node_getPath(curr)))
-            return ALREADY_IN_TREE;
-        restPath += (strlen(Node_getPath(curr)) + 1);
-    }
-
-    /* check this*/
-    if (isFile(curr)) return NOT_A_DIRECTORY;
-
-    copyPath = malloc(strlen(restPath)+1);
-    if(copyPath == NULL)
-        return MEMORY_ERROR;
-    strcpy(copyPath, restPath);
-
-    /* check this */
-    /* maybe NOT_A_DIRECTORY */
-    if (strstr(copyPath,"/") != NULL) return CONFLICTING_PATH;
-
-    new = Node_create(copyPath, curr, contents, length, ISFILE);
-    result = FT_linkParentToChild(curr, new);
-
-    if(result == SUCCESS) count++;
-    else (void) Node_destroy(new, getType(new));
-
+    result = FT_insertRestOfPath(path, curr, ISFILE);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
 }

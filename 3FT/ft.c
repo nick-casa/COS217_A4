@@ -205,7 +205,7 @@ int FT_insertDir(char *path) {
         return INITIALIZATION_ERROR;
     curr = FT_traversePathFrom(path, root, ISDIRECTORY);
 
-    result = FT_insertRestOfPath(path, curr, ISDIRECTORY);
+    result = FT_insertRestOfPath(path, curr, ISDIRECTORY, NULL, NULL);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
 }

@@ -23,9 +23,13 @@ struct node {
       NULL for the root of the tree */
    Node_T parent;
 
-   /* the children nodes of this node
+   /* the directory children nodes of this node
       stored in sorted order by name */
-   DynArray_T children;
+   DynArray_T dirChildren;
+
+    /* the file children nodes of this node
+      stored in sorted order by name */
+    DynArray_T fileChildren;
 
    /* if the node is a file, contains
       contents. Otherwise, NULL  */
@@ -103,12 +107,19 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
    }
    else{
        new->type = type;
-       new->children = DynArray_new(0);
-       if(new->children == NULL) {
+       new->fileChildren = DynArray_new(0);
+       if(new->fileChildren == NULL) {
           free(new->path);
           free(new);
           assert(parent == NULL /* || CheckerDT_Node_isValid(parent)*/);
           return NULL;
+       }
+       new->dirChildren = DynArray_new(0);
+       if(new->dirChildren == NULL) {
+           free(new->path);
+           free(new);
+           assert(parent == NULL /* || CheckerDT_Node_isValid(parent)*/);
+           return NULL;
        }
    }
 
@@ -126,8 +137,8 @@ size_t Node_destroy(Node_T n, nodeType type) {
    assert(n != NULL);
 
    if (type == ISDIRECTORY) {
-       for (i = 0; i < DynArray_getLength(n->children); i++) {
-           c = DynArray_get(n->children, i);
+       for (i = 0; i < DynArray_getLength(n->dirChildren); i++) {
+           c = DynArray_get(n->dirChildren, i);
            count += Node_destroy(c, c->type);
        }
        DynArray_free(n->children);
@@ -201,6 +212,9 @@ Node_T Node_getChild(Node_T n, size_t childID) {
    if(DynArray_getLength(n->children) > childID) {
       return DynArray_get(n->children, childID);
    }
+   else if(DynArray_getLength(n->fileChildren) > childID) {
+       return DynArray_get(n->fileChildren, childID);
+   }
    else {
       return NULL;
    }
@@ -252,14 +266,30 @@ int Node_linkChild(Node_T parent, Node_T child) {
       return PARENT_CHILD_ERROR;
    }
    child->parent = parent;
-   if(DynArray_bsearch(parent->children, child, &i,
+   if(DynArray_bsearch(parent->dirChildren, child, &i,
          (int (*)(const void*, const void*)) Node_compare) == 1) {
       assertNodes(parent,child);
       return ALREADY_IN_TREE;
    }
-   if(DynArray_addAt(parent->children, i, child) == TRUE) {
-      assertNodes(parent,child);
-      return SUCCESS;
+   if(DynArray_bsearch(parent->fileChildren, child, &i,
+                        (int (*)(const void*, const void*)) Node_compare) == 1) {
+       assertNodes(parent,child);
+       return ALREADY_IN_TREE;
+   }
+   /*check this*/
+   if(parent->type == ISDIRECTORY){
+       if(child->type == ISFILE){
+           if(DynArray_addAt(parent->fileChildren, i, child) == TRUE) {
+              assertNodes(parent,child);
+              return SUCCESS;
+           }
+       }
+       else{
+           if(DynArray_addAt(parent->dirChildren, i, child) == TRUE) {
+               assertNodes(parent,child);
+               return SUCCESS;
+           }
+       }
    }
    else {
       assertNodes(parent,child);
@@ -277,13 +307,19 @@ int  Node_unlinkChild(Node_T parent, Node_T child) {
 
    if(parent->type == ISFILE) return PARENT_CHILD_ERROR;
 
-   if(DynArray_bsearch(parent->children, child, &i,
+   if(DynArray_bsearch(parent->dirChildren, child, &i,
          (int (*)(const void*, const void*)) Node_compare) == 0) {
       assertNodes(parent,child);
       return PARENT_CHILD_ERROR;
    }
+   if(DynArray_bsearch(parent->fileChildren, child, &i,
+                        (int (*)(const void*, const void*)) Node_compare) == 0) {
+        assertNodes(parent,child);
+        return PARENT_CHILD_ERROR;
+   }
+   if(child->type == ISFILE) (void) DynArray_removeAt(parent->fileChildren, i);
+   else if(child->type == ISDIRECTORY) (void) DynArray_removeAt(parent->dirChildren, i);
 
-   (void) DynArray_removeAt(parent->children, i);
    assertNodes(parent,child);
    return SUCCESS;
 }

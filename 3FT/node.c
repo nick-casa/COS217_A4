@@ -450,7 +450,8 @@ size_t getFileLength(Node_T n) {
 /* see node.h for specification */
 boolean isFile(Node_T n){
     if(n == NULL) return FALSE;
-    return (n->type == ISFILE);
+    if(n->type == ISFILE) return TRUE;
+    else return FALSE;
 }
 
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {

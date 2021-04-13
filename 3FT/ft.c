@@ -147,7 +147,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
 
 static boolean contains(char *path, nodeType type){
     Node_T curr;
-    boolean result == FALSE;
+    boolean result = FALSE;
 
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);

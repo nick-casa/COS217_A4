@@ -38,9 +38,7 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
             found = FT_traversePathFrom(path,
                                         Node_getChildDirectory(curr, i), type);
         }
-        if (type == ISDIRECTORY) {
-            if(found != NULL) return found;
-        }
+        if(found != NULL) return found;
         for(i = 0; i < Node_getNumFileChildren(curr); i++) {
             found = FT_traversePathFrom(path,
                                         Node_getChildFile(curr, i), type);

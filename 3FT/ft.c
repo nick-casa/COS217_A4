@@ -160,9 +160,9 @@ int FT_destroy(void){
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     if(!isInitialized)
         return INITIALIZATION_ERROR;
-    if(curr != NULL) {
-        if(isFile(curr)) count -= Node_destroy(curr, ISFILE);
-        else count -= Node_destroy(curr, ISDIRECTORY);
+    if(root != NULL) {
+        if(isFile(root)) count -= Node_destroy(root, ISFILE);
+        else count -= Node_destroy(root, ISDIRECTORY);
     }
     root = NULL;
     isInitialized = 0;
@@ -250,6 +250,8 @@ int FT_insertFile(char *path, void *contents, size_t length){
     /* can't insert file if root is NULL */
     Node_T curr, new;
     int result;
+    char* copyPath;
+    char* restPath = path;
 
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);

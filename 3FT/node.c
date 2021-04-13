@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* node.c                                                             */
-/* Author:                                                            */
+/* Author: Alina Chen and Nickolas Casalinuovo                        */
 /*--------------------------------------------------------------------*/
 
 #include <stdlib.h>
@@ -325,7 +325,8 @@ int Node_linkChild(Node_T parent, Node_T child) {
    child->parent = parent;
    if(child->type == ISDIRECTORY){
        if(DynArray_bsearch(parent->dirChildren, child, &i,
-             (int (*)(const void*, const void*)) Node_compare) == 1) {
+             (int (*)(const void*, const void*))
+             ) == 1) {
           assertNodes(parent,child);
           return ALREADY_IN_TREE;
        }

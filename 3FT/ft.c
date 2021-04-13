@@ -20,7 +20,16 @@ static Node_T root;
 /* a counter of the number of nodes in the hierarchy */
 static size_t count;
 
-static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
+/*
+   Starting at the parameter curr, traverses as far down
+   the hierarchy as possible while still matching the path
+   parameter.
+
+   Returns a pointer to the farthest matching node down that path,
+   or NULL if there is no node in curr's hierarchy that matches
+   a prefix of the path
+*/
+static Node_T FT_traversePathFrom(char* path, Node_T curr) {
     Node_T found;
     size_t i;
 
@@ -35,13 +44,13 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
     else if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
         for(i = 0; i < Node_getNumDirChildren(curr); i++) {
             found = FT_traversePathFrom(path,
-                                        Node_getChildDirectory(curr, i), type);
+                                        Node_getChildDirectory(curr, i));
 
             if(found != NULL) return found;
         }
         for(i = 0; i < Node_getNumFileChildren(curr); i++) {
             found = FT_traversePathFrom(path,
-                                        Node_getChildFile(curr, i), type);
+                                        Node_getChildFile(curr, i));
             if(found != NULL) return found;
         }
 
@@ -50,6 +59,7 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
     return NULL;
 }
 
+/*
 static int FT_linkParentToChild(Node_T parent, Node_T child) {
 
     assert(parent != NULL);

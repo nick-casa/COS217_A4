@@ -59,7 +59,13 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr) {
     return NULL;
 }
 
-/* */
+/*
+   Given a prospective parent and child node,
+   adds child to parent's children list, if possible
+
+   If not possible, destroys the hierarchy rooted at child
+   and returns PARENT_CHILD_ERROR, otherwise, returns SUCCESS.
+*/
 static int FT_linkParentToChild(Node_T parent, Node_T child) {
 
     assert(parent != NULL);
@@ -72,6 +78,22 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
     return SUCCESS;
 }
 
+/*
+   Inserts a new path into the tree rooted at parent, or, if
+   parent is NULL, as the root of the data structure.
+
+   If a node representing path already exists, returns ALREADY_IN_TREE
+
+   If a proper prefix of a path exists as a file, return NOT_A_DIRECTORY.
+
+   If there is an allocation error in creating any of the new nodes or
+   their fields, returns MEMORY_ERROR
+
+   If there is an error linking any of the new nodes,
+   returns PARENT_CHILD_ERROR
+
+   Otherwise, returns SUCCESS
+*/
 static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* contents, size_t length) {
     Node_T curr = parent;
     Node_T firstNew = NULL;
@@ -150,6 +172,10 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
     return result;
 }
 
+/*
+  Returns TRUE if the tree contains the full path parameter as the type
+  given by the type parameter and FALSE otherwise.
+*/
 static boolean FT_contains(char *path, nodeType type){
     Node_T curr;
     boolean result = FALSE;
@@ -175,15 +201,18 @@ static boolean FT_contains(char *path, nodeType type){
     return result;
 }
 
+
 boolean FT_containsFile(char *path){
     assert(path != NULL);
     return FT_contains(path, ISFILE);
 }
 
+
 boolean FT_containsDir(char *path) {
     assert(path != NULL);
     return FT_contains(path, ISDIRECTORY);
 }
+
 
 int FT_destroy(void){
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
@@ -225,6 +254,13 @@ int FT_insertDir(char *path) {
     return result;
 }
 
+/*
+  Removes the hierarchy rooted at path starting from
+  curr. If curr is the data structure's root, root becomes NULL.
+
+  Returns NO_SUCH_PATH if curr is not the node for path,
+  and SUCCESS otherwise.
+ */
 static int FT_rmPathAt(char* path, Node_T curr) {
     Node_T parent;
 
@@ -366,6 +402,11 @@ int FT_stat(char *path, boolean *type, size_t *length){
 
 }
 
+/*
+   Performs a pre-order traversal of the tree rooted at n,
+   inserting each payload to DynArray_T d beginning at index i.
+   Returns the next unused index in d after the insertion(s).
+*/
 static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
     size_t c;
     size_t cFile;

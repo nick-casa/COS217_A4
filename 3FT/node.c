@@ -375,7 +375,7 @@ int  Node_unlinkChild(Node_T parent, Node_T child) {
        }
    }
 
-   else if (child->type == ISFILE) {
+   else {
        if (DynArray_bsearch(parent->fileChildren, child, &i,
                             (int (*)(const void *, const void *)) Node_compare) == 0) {
            assertNodes(parent, child);

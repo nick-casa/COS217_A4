@@ -100,7 +100,7 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
    new->parent = parent;
 
    if(type == ISFILE){
-       new->dirChilren = NULL;
+       new->dirChildren = NULL;
        new->fileChildren = NULL;
        new->uLength= length;
        new->pvContents = contents;
@@ -298,9 +298,13 @@ int Node_linkChild(Node_T parent, Node_T child) {
        return PARENT_CHILD_ERROR;
    }
 
-   if(Node_hasChild(parent, child->path, NULL)) {
+   if(Node_hasChildDirectory(parent, child->path, NULL)) {
       assertNodes(parent,child);
       return ALREADY_IN_TREE;
+   }
+   if(Node_hasChildFile(parent, child->path, NULL)) {
+       assertNodes(parent,child);
+       return ALREADY_IN_TREE;
    }
    i = strlen(parent->path);
    if(strncmp(child->path, parent->path, i)) {

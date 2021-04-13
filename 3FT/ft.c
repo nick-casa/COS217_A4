@@ -149,11 +149,21 @@ static boolean contains(char *path, nodeType type){
         result = FALSE;
     else if(strcmp(path, Node_getPath(curr)))
         result = FALSE;
-    else
-        result = TRUE;
+    else{
+        if(getType(curr) == type) result = TRUE;
+        else result = FALSE;
+    }
 
     /*assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
+}
+
+boolean FT_containsFile(char *path){
+    return contains(path, ISFILE);
+}
+
+boolean FT_containsDir(char *path) {
+    return contains(path, ISDIRECTORY);
 }
 
 int FT_destroy(void){
@@ -195,14 +205,6 @@ int FT_insertDir(char *path) {
     result = FT_insertRestOfPath(path, curr, ISDIRECTORY);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
-}
-
-boolean FT_containsFile(char *path){
-    return contains(path, ISFILE);
-}
-
-boolean FT_containsDir(char *path) {
-    return contains(path, ISDIRECTORY);
 }
 
 static int FT_rmPathAt(char* path, Node_T curr) {

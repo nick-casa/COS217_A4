@@ -59,7 +59,7 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr) {
     return NULL;
 }
 
-/*
+/* */
 static int FT_linkParentToChild(Node_T parent, Node_T child) {
 
     assert(parent != NULL);
@@ -160,7 +160,7 @@ static boolean FT_contains(char *path, nodeType type){
     if(!isInitialized)
         return FALSE;
 
-    curr = FT_traversePathFrom(path, root, type);
+    curr = FT_traversePathFrom(path, root);
     if(curr == NULL)
         result = FALSE;
     else if(strcmp(path, Node_getPath(curr)))
@@ -219,7 +219,7 @@ int FT_insertDir(char *path) {
 
     if(!isInitialized)
         return INITIALIZATION_ERROR;
-    curr = FT_traversePathFrom(path, root, ISDIRECTORY);
+    curr = FT_traversePathFrom(path, root);
     result = FT_insertRestOfPath(path, curr, ISDIRECTORY, NULL, 0);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
@@ -258,7 +258,7 @@ int FT_rmDir(char *path){
     if(!isInitialized)
         return INITIALIZATION_ERROR;
 
-    curr = FT_traversePathFrom(path, root, ISDIRECTORY);
+    curr = FT_traversePathFrom(path, root);
     if(curr == NULL || strcmp(Node_getPath(curr), path))
         result =  NO_SUCH_PATH;
     else if(isFile(curr)) result = NOT_A_DIRECTORY;
@@ -279,7 +279,7 @@ int FT_insertFile(char *path, void *contents, size_t length){
     if(!isInitialized) return INITIALIZATION_ERROR;
     if (root == NULL) return CONFLICTING_PATH;
 
-    curr = FT_traversePathFrom(path, root, ISFILE);
+    curr = FT_traversePathFrom(path, root);
     /* if (isFile(curr)) curr = Node_getParent(curr); */ 
   
     /* if curr is a file return NOT_A_DIRECTORY*/
@@ -298,7 +298,7 @@ int FT_rmFile(char *path){
     if(!isInitialized)
         return INITIALIZATION_ERROR;
 
-    curr = FT_traversePathFrom(path, root, ISFILE);
+    curr = FT_traversePathFrom(path, root);
     if(curr == NULL || strcmp(Node_getPath(curr),path))
         result =  NO_SUCH_PATH;
     else if(!isFile(curr)) result = NOT_A_FILE;
@@ -317,7 +317,7 @@ void *FT_getFileContents(char *path){
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);
 
-    curr = FT_traversePathFrom(path, root, ISFILE);
+    curr = FT_traversePathFrom(path, root);
     if(!isFile(curr) || curr == NULL) result = NULL;
     else result = getFileContents(curr);
 
@@ -332,7 +332,7 @@ void *FT_replaceFileContents(char *path, void *newContents, size_t newLength) {
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);
 
-    curr = FT_traversePathFrom(path, root, ISFILE);
+    curr = FT_traversePathFrom(path, root);
     if(!isFile(curr) || curr == NULL) result = NULL;
     else result = replaceFileContents(curr,newContents,newLength);
 
@@ -350,11 +350,11 @@ int FT_stat(char *path, boolean *type, size_t *length){
 
     if(FT_containsDir(path)) {
         *type = FALSE;
-        curr = FT_traversePathFrom(path, root, ISDIRECTORY);
+        curr = FT_traversePathFrom(path, root);
     }
     else if(FT_containsFile(path)){
         *type = TRUE;
-        curr = FT_traversePathFrom(path, root, ISFILE);
+        curr = FT_traversePathFrom(path, root);
         *length = getFileLength(curr);
     }
     else

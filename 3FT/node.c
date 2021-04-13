@@ -127,7 +127,7 @@ size_t Node_destroy(Node_T n, nodeType type) {
    if (type == ISDIRECTORY) {
        for (i = 0; i < DynArray_getLength(n->children); i++) {
            c = DynArray_get(n->children, i);
-           count += Node_destroy(c, type);
+           count += Node_destroy(c, c->type);
        }
        DynArray_free(n->children);
    }

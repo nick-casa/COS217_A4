@@ -35,10 +35,16 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
 
     else if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
         for(i = 0; i < Node_getNumChildren(curr); i++) {
-            if (!isFile(Node_getChild(curr, i)))
-                found = FT_traversePathFrom(path,
+           if (!isFile(Node_getChild(curr, i))){
+               found = FT_traversePathFrom(path,
                                             Node_getChild(curr, i), type);
-            else found = curr;
+           }
+            else {
+               if (!strncmp(path, Node_getPath(Node_getChild(curr,i)), strlen(Node_getPath(Node_getChild(curr,i)))))
+                  found = Node_getChild(curr, i);
+               else found = curr;
+               
+            }
             if(found != NULL)
                 return found;
         }
@@ -92,7 +98,8 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
     dirToken = strtok(copyPath, "/");
 
     while(dirToken != NULL) {
-        if (type == ISFILE && strtok(NULL,"/") == NULL){
+        char* nextToken = strtok(NULL, "/");
+        if (type == ISFILE && nextToken == NULL){
             new = Node_create(dirToken, curr, contents, length, ISFILE);
         }
         else{
@@ -118,7 +125,8 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         }
 
         curr = new;
-        dirToken = strtok(NULL, "/");
+        dirToken = nextToken;
+        /*  dirToken = strtok(NULL, "/"); */
     }
 
     free(copyPath);
@@ -217,6 +225,8 @@ static int FT_rmPathAt(char* path, Node_T curr) {
     assert(path != NULL);
     assert(curr != NULL);
 
+    /* if(isFile(curr)) return NOT_A_DIRECTORY; */
+
     parent = Node_getParent(curr);
 
     if(!strcmp(path,Node_getPath(curr))) {
@@ -243,8 +253,9 @@ int FT_rmDir(char *path){
         return INITIALIZATION_ERROR;
 
     curr = FT_traversePathFrom(path, root, ISDIRECTORY);
-    if(curr == NULL)
+    if(curr == NULL || strcmp(Node_getPath(curr), path))
         result =  NO_SUCH_PATH;
+    else if(isFile(curr)) result = NOT_A_DIRECTORY;
     else
         result = FT_rmPathAt(path, curr);
 
@@ -263,6 +274,8 @@ int FT_insertFile(char *path, void *contents, size_t length){
     if (root == NULL) return CONFLICTING_PATH;
 
     curr = FT_traversePathFrom(path, root, ISFILE);
+    /* if (isFile(curr)) curr = Node_getParent(curr); */ 
+  
     /* if curr is a file return NOT_A_DIRECTORY*/
     result = FT_insertRestOfPath(path, curr, ISFILE, contents, length);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
@@ -280,8 +293,9 @@ int FT_rmFile(char *path){
         return INITIALIZATION_ERROR;
 
     curr = FT_traversePathFrom(path, root, ISFILE);
-    if(curr == NULL)
+    if(curr == NULL || strcmp(Node_getPath(curr),path))
         result =  NO_SUCH_PATH;
+    else if(!isFile(curr)) result = NOT_A_FILE;
     else
         result = FT_rmPathAt(path, curr);
 

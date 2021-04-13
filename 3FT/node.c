@@ -102,6 +102,7 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
        new->type = type;
    }
    else{
+       new->type = type;
        new->children = DynArray_new(0);
        if(new->children == NULL) {
           free(new->path);

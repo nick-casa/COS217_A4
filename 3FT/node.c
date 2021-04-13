@@ -266,7 +266,6 @@ Node_T Node_getChildFile(Node_T n, size_t childID) {
 /* see node.h for specification */
 Node_T Node_getParent(Node_T n) {
    assert(n != NULL);
-
    return n->parent;
 }
 
@@ -369,14 +368,12 @@ int Node_addChild(Node_T parent, const char* newNode, void* contents,
    assert(parent != NULL);
    assert(newNode != NULL);
 
-   /* precautionary */
    if (type == ISFILE)
        new = Node_create(newNode, parent, contents, length, type);
    else
        new = Node_create(newNode, parent, NULL, 0,  type);
 
    if(new == NULL) {
-      /* assert(CheckerDT_Node_isValid(parent)); */
       return PARENT_CHILD_ERROR;
    }
    result = Node_linkChild(parent, new);

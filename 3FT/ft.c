@@ -34,20 +34,16 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
         return curr;
 
     else if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
-        for(i = 0; i < Node_getNumChildren(curr); i++) {
-           if (!isFile(Node_getChild(curr, i))){
-               found = FT_traversePathFrom(path,
-                                            Node_getChild(curr, i), type);
-           }
-           else { /*child is a file*/
-               if (!strncmp(path, Node_getPath(Node_getChild(curr,i)), strlen(Node_getPath(Node_getChild(curr,i)))))
-                  found = Node_getChild(curr, i);
-               /*else found = curr;*/
-               
-            }
-            if(found != NULL)
-                return found;
+        for(i = 0; i < Node_getNumDirChildren(curr); i++) {
+            found = FT_traversePathFrom(path,
+                                        Node_getChildDirectory(curr, i), type);
         }
+        if (type == )
+        for(i = 0; i < Node_getNumFileChildren(curr); i++) {
+            found = FT_traversePathFrom(path,
+                                        Node_getChildFile(curr, i), type);
+        }
+        if(found != NULL) return found;
         return curr;
     }
     return NULL;

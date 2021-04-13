@@ -184,7 +184,7 @@ size_t Node_getNumChildren(Node_T n) {
 }
 
 /* see node.h for specification */
-int Node_hasChild(Node_T n, const char* path, size_t* childID) {
+int Node_hasChildFile(Node_T n, const char* path, size_t* childID) {
    size_t index;
    int result;
    Node_T checker;
@@ -200,12 +200,10 @@ int Node_hasChild(Node_T n, const char* path, size_t* childID) {
    if(checker == NULL) {
       return -1;
    }
-   result = DynArray_bsearch(n->dirChildren, checker, &index,
-                    (int (*)(const void*, const void*)) Node_compare);
-   if (result == 0) {
-       result = DynArray_bsearch(n->fileChildren, checker, &index,
+
+   result = DynArray_bsearch(n->fileChildren, checker, &index,
                                  (int (*)(const void*, const void*)) Node_compare);
-   }
+
    (void) Node_destroy(checker, checker->type);
 
    if(childID != NULL)
@@ -215,19 +213,57 @@ int Node_hasChild(Node_T n, const char* path, size_t* childID) {
 }
 
 /* see node.h for specification */
-Node_T Node_getChild(Node_T n, size_t childID) {
+int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID) {
+    size_t index;
+    int result;
+    Node_T checker;
+
+    assert(n != NULL);
+    assert(path != NULL);
+
+    if (n->type == ISFILE) return 0;
+
+    checker = Node_create(path, NULL, NULL, 0, ISDIRECTORY);
+    /* checker = Node_create(path, NULL); */
+
+    if(checker == NULL) {
+        return -1;
+    }
+    result = DynArray_bsearch(n->dirChildren, checker, &index,
+                              (int (*)(const void*, const void*)) Node_compare);
+
+    (void) Node_destroy(checker, checker->type);
+
+    if(childID != NULL)
+        *childID = index;
+
+    return result;
+}
+
+/* see node.h for specification */
+Node_T Node_getChildDirectory(Node_T n, size_t childID) {
    assert(n != NULL);
    if (n->type == ISFILE) return 0;
 
    if(DynArray_getLength(n->dirChildren) > childID) {
       return DynArray_get(n->dirChildren, childID);
    }
-   else if(DynArray_getLength(n->fileChildren) > childID) {
-       return DynArray_get(n->fileChildren, childID);
-   }
    else {
       return NULL;
    }
+}
+
+/* see node.h for specification */
+Node_T Node_getChildFile(Node_T n, size_t childID) {
+    assert(n != NULL);
+    if (n->type == ISFILE) return 0;
+
+    else if(DynArray_getLength(n->fileChildren) > childID) {
+        return DynArray_get(n->fileChildren, childID);
+    }
+    else {
+        return NULL;
+    }
 }
 
 /* see node.h for specification */

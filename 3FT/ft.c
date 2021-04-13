@@ -176,10 +176,12 @@ static boolean FT_contains(char *path, nodeType type){
 }
 
 boolean FT_containsFile(char *path){
+    assert(path != NULL);
     return FT_contains(path, ISFILE);
 }
 
 boolean FT_containsDir(char *path) {
+    assert(path != NULL);
     return FT_contains(path, ISDIRECTORY);
 }
 
@@ -365,7 +367,7 @@ int FT_stat(char *path, boolean *type, size_t *length){
 
 static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
     size_t c;
-    size_t a;
+    size_t cFile;
     Node_T file;
 
     assert(d != NULL);
@@ -373,8 +375,8 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
     if(n != NULL) {
         (void) DynArray_set(d, i, Node_getPath(n));
         i++;
-        for(a = 0; a < Node_getNumFileChildren(n); a++){
-            file = Node_getChildFile(n, a);
+        for(cFile = 0; cFile < Node_getNumFileChildren(n); a++){
+            file = Node_getChildFile(n, cFile);
             (void) DynArray_set(d, i, Node_getPath(file));
             i++;
         }

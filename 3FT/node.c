@@ -111,7 +111,7 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
        }
    }
 
-   assert(parent == NULL /*|| CheckerDT_Node_isValid(parent)*/);
+   /* assert(parent == NULL /*|| CheckerDT_Node_isValid(parent)); */
    /* assert(CheckerDT_Node_isValid(new)); */
    return new;
 }

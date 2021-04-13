@@ -83,6 +83,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         }
         restPath += (strlen(Node_getPath(curr)) + 1);
     }
+    if(isFile(parent)) return NOT_A_DIRECTORY;
 
     copyPath = malloc(strlen(restPath)+1);
     if(copyPath == NULL)
@@ -204,7 +205,6 @@ int FT_insertDir(char *path) {
     if(!isInitialized)
         return INITIALIZATION_ERROR;
     curr = FT_traversePathFrom(path, root, ISDIRECTORY);
-
     result = FT_insertRestOfPath(path, curr, ISDIRECTORY, NULL, 0);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
@@ -380,7 +380,6 @@ static void FT_strcatAccumulate(char* str, char* acc) {
     if(str != NULL)
         strcat(acc, str); strcat(acc, "\n");
 }
-
 
 char *FT_toString(void){
     DynArray_T nodes;

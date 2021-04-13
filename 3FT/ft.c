@@ -140,8 +140,6 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         result = FT_linkParentToChild(parent, firstNew);
         if(result == SUCCESS)
             count += newCount;
-        else
-            (void) Node_destroy(firstNew, getType(firstNew));
     }
     return result;
 }

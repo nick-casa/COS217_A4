@@ -138,8 +138,13 @@ size_t getFileLength(Node_T n);
 */
 boolean isFile(Node_T n);
 
-/* Replaces the file contents */
+/*
+  Replaces current contents of the node n with the newContents. Replaces
+  the length of the node n with the newLength. Returns the old contents i
+  f successful. (Note: contents may be NULL.)
+*/
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength);
 
+/* Returns the type of the node n. */
 nodeType getType(Node_T n);
 #endif

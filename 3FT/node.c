@@ -456,11 +456,7 @@ boolean isFile(Node_T n){
     else return FALSE;
 }
 
-/*
-  Replaces current contents of the node n with the newContents. Replaces
-  the length of the node n with the newLength. Returns the old contents i
-  f successful. (Note: contents may be NULL.)
-*/
+
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {
     void* oldContents;
     assert(n != NULL);
@@ -470,7 +466,6 @@ void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {
     return oldContents;
 }
 
-/* Returns the type of the node n. */
 nodeType getType(Node_T n) {
     assert(n != NULL);
     return n->type;

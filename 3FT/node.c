@@ -100,7 +100,8 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
    new->parent = parent;
 
    if(type == ISFILE){
-       new->children = NULL;
+       new->dirChilren = NULL;
+       new->fileChildren = NULL;
        new->uLength= length;
        new->pvContents = contents;
        new->type = type;
@@ -141,7 +142,12 @@ size_t Node_destroy(Node_T n, nodeType type) {
            c = DynArray_get(n->dirChildren, i);
            count += Node_destroy(c, c->type);
        }
-       DynArray_free(n->children);
+       DynArray_free(n->dirChildren);
+       for (i = 0; i < DynArray_getLength(n->fileChildren); i++) {
+           c = DynArray_get(n->fileChildren, i);
+           count += Node_destroy(c, c->type);
+       }
+       DynArray_free(n->fileChildren);
    }
    /* MIGHT NEED TO FIX THIS LATER!!!!!!!!! */
    free(n->path);
@@ -174,7 +180,7 @@ const char* Node_getPath(Node_T n) {
 size_t Node_getNumChildren(Node_T n) {
    assert(n != NULL);
    if(n->type == ISFILE) return 0;
-   else return DynArray_getLength(n->children);
+   else return DynArray_getLength(n->dirChildren) + DynArray_getLength(n->fileChildren);
 }
 
 /* see node.h for specification */
@@ -194,8 +200,12 @@ int Node_hasChild(Node_T n, const char* path, size_t* childID) {
    if(checker == NULL) {
       return -1;
    }
-   result = DynArray_bsearch(n->children, checker, &index,
+   result = DynArray_bsearch(n->dirChildren, checker, &index,
                     (int (*)(const void*, const void*)) Node_compare);
+   if (result == 0) {
+       result = DynArray_bsearch(n->fileChildren, checker, &index,
+                                 (int (*)(const void*, const void*)) Node_compare);
+   }
    (void) Node_destroy(checker, checker->type);
 
    if(childID != NULL)
@@ -209,8 +219,8 @@ Node_T Node_getChild(Node_T n, size_t childID) {
    assert(n != NULL);
    if (n->type == ISFILE) return 0;
 
-   if(DynArray_getLength(n->children) > childID) {
-      return DynArray_get(n->children, childID);
+   if(DynArray_getLength(n->dirChildren) > childID) {
+      return DynArray_get(n->dirChildren, childID);
    }
    else if(DynArray_getLength(n->fileChildren) > childID) {
        return DynArray_get(n->fileChildren, childID);

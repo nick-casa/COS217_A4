@@ -374,7 +374,7 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
             i++;
         }
         for(c = 0; c < Node_getNumDirChildren(n); c++) {
-            i = FT_preOrderTraversal(Node_getChildDirectory(n, c), d, i);xx
+            i = FT_preOrderTraversal(Node_getChildDirectory(n, c), d, i);
         }
     }
     return i;

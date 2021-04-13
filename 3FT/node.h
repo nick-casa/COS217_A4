@@ -15,6 +15,7 @@
 */
 typedef struct node* Node_T;
 
+typedef enum {ISDIRECTORY, ISFILE} nodeType;
 
 
 /*

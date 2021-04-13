@@ -358,3 +358,8 @@ void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {
     n->uLength = newLength;
     return oldContents;
 }
+
+nodeType getType(Node_T n) {
+    assert(n != NULL);
+    return n->type;
+}

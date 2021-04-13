@@ -127,7 +127,7 @@ size_t Node_destroy(Node_T n, nodeType type) {
    if (type == ISDIRECTORY) {
        for (i = 0; i < DynArray_getLength(n->children); i++) {
            c = DynArray_get(n->children, i);
-           count += Node_destroy(c);
+           count += Node_destroy(c, type);
        }
        DynArray_free(n->children);
    }
@@ -182,7 +182,7 @@ int Node_hasChild(Node_T n, const char* path, size_t* childID) {
    }
    result = DynArray_bsearch(n->children, checker, &index,
                     (int (*)(const void*, const void*)) Node_compare);
-   (void) Node_destroy(checker);
+   (void) Node_destroy(checker, checker->type);
 
    if(childID != NULL)
       *childID = index;
@@ -308,7 +308,7 @@ int Node_addChild(Node_T parent, const char* newNode, void* contents,
    }
    result = Node_linkChild(parent, new);
    if(result != SUCCESS)
-      (void) Node_destroy(new);
+      (void) Node_destroy(new, new->type);
     /* else
         assert(CheckerDT_Node_isValid(new)); */
 

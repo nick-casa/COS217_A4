@@ -57,7 +57,9 @@ const char* Node_getPath(Node_T n);
   If n is a DIRECTORY, returns the number of child directories n has. If n is a FILE,
   returns 0.
 */
-size_t Node_getNumChildren(Node_T n);
+size_t Node_getNumDirChildren(Node_T n);
+
+size_t Node_getNumFileChildren(Node_T n);
 
 /*
    Returns 1 if n has a child directory with path,
@@ -68,14 +70,16 @@ size_t Node_getNumChildren(Node_T n);
    child's identifier in *childID. If n does not have such a child,
    store the identifier that such a child would have in *childID.
 */
-int Node_hasChild(Node_T n, const char* path, size_t* childID);
+int Node_hasChildFile(Node_T n, const char* path, size_t* childID);
 
+int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID);
 /*
    Returns the child node of n with identifier childID, if one exists,
    otherwise returns NULL.
 */
-Node_T Node_getChild(Node_T n, size_t childID);
+Node_T Node_getChildDirectory(Node_T n, size_t childID);
 
+Node_T Node_getChildFile(Node_T n, size_t childID);
 /*
    Returns the parent node of n, if it exists, otherwise returns NULL
 */

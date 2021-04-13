@@ -177,10 +177,16 @@ const char* Node_getPath(Node_T n) {
 }
 
 /* see node.h for specification */
-size_t Node_getNumChildren(Node_T n) {
+size_t Node_getNumDirChildren(Node_T n) {
    assert(n != NULL);
    if(n->type == ISFILE) return 0;
-   else return DynArray_getLength(n->dirChildren) + DynArray_getLength(n->fileChildren);
+   else return DynArray_getLength(n->dirChildren);
+}
+
+size_t Node_getNumFileChildren(Node_T n) {
+    assert(n != NULL);
+    if(n->type == ISFILE) return 0;
+    else return DynArray_getLength(n->fileChildren);
 }
 
 /* see node.h for specification */

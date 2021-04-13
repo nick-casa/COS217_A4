@@ -347,3 +347,12 @@ boolean isFile(Node_t n){
     assert(n != NULL);
     return (n->type == ISFILE);
 }
+
+void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {
+    void* oldContents;
+    assert(n != NULL);
+    oldContents = pvContents;
+    pvContents = newContents;
+    uLength = newLength;
+    return oldContents;
+}

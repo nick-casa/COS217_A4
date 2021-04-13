@@ -9,7 +9,6 @@ dynarray.o: dynarray.c dynarray.h
 ft_client.o: ft_client.c ft.h a4def.h
 	gcc217 -g -c $<
 
-
 ft.o: ft.c  dynarray.h ft.h a4def.h node.h
 	gcc217 -g -c $<
 

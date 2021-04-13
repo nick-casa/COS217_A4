@@ -78,7 +78,9 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type) {
     }
 
     else {
-        if(!strcmp(path, Node_getPath(curr))) return ALREADY_IN_TREE;
+        if(!strcmp(path, Node_getPath(curr))) {
+            return ALREADY_IN_TREE;
+        }
         restPath += (strlen(Node_getPath(curr)) + 1);
     }
 
@@ -200,9 +202,45 @@ boolean FT_containsDir(char *path) {
     return contains(path, ISDIRECTORY);
 }
 
-/**/
-int FT_rmDir(char *path){
+static int FT_rmPathAt(char* path, Node_T curr) {
+    Node_T parent;
 
+    assert(path != NULL);
+    assert(curr != NULL);
+
+    parent = Node_getParent(curr);
+
+    if(!strcmp(path,Node_getPath(curr))) {
+        if(parent == NULL)
+            root = NULL;
+        else
+            Node_unlinkChild(parent, curr);
+
+        if(curr != NULL) count -= Node_destroy(curr);
+        return SUCCESS;
+    }
+    else
+        return NO_SUCH_PATH;
+}
+
+int FT_rmDir(char *path){
+    Node_T curr;
+    int result;
+
+    /*assert(CheckerDT_isValid(isInitialized,root,count));*/
+    assert(path != NULL);
+
+    if(!isInitialized)
+        return INITIALIZATION_ERROR;
+
+    curr = FT_traversePathFrom(path, root, ISDIRECTORY);
+    if(curr == NULL)
+        result =  NO_SUCH_PATH;
+    else
+        result = FT_rmPathAt(path, cur);
+
+    /*assert(CheckerDT_isValid(isInitialized,root,count));*/
+    return result;
 }
 
 int FT_insertFile(char *path, void *contents, size_t length){

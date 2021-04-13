@@ -134,14 +134,11 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         count = newCount;
         return SUCCESS;
     }
-    else {
-        result = FT_linkParentToChild(parent, firstNew);
-        if(result == SUCCESS)
-            count += newCount;
-        /* else
-            (void) Node_destroy(firstNew, getType(firstNew));
-        */    
-    }
+
+    result = FT_linkParentToChild(parent, firstNew);
+    if(result == SUCCESS)
+        count += newCount;
+
     return result;
 }
 

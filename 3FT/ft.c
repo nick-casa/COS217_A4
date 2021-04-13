@@ -74,7 +74,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
 
     if(curr == NULL){
         if(root != NULL) {return CONFLICTING_PATH;
-        }ß
+        }
     }
 
     else {

@@ -190,7 +190,7 @@ size_t Node_getNumFileChildren(Node_T n) {
 }
 
 /* see node.h for specification */
-int Node_hasChildFile(Node_T n, const char* path, size_t* childID) {
+static int Node_hasChildFile(Node_T n, const char* path, size_t* childID) {
    size_t index;
    int result;
    Node_T checker;
@@ -219,7 +219,7 @@ int Node_hasChildFile(Node_T n, const char* path, size_t* childID) {
 }
 
 /* see node.h for specification */
-int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID) {
+static int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID) {
     size_t index;
     int result;
     Node_T checker;

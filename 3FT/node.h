@@ -70,9 +70,9 @@ size_t Node_getNumFileChildren(Node_T n);
    child's identifier in *childID. If n does not have such a child,
    store the identifier that such a child would have in *childID.
 */
-int Node_hasChildFile(Node_T n, const char* path, size_t* childID);
+/*int Node_hasChildFile(Node_T n, const char* path, size_t* childID);
 
-int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID);
+int Node_hasChildDirectory(Node_T n, const char* path, size_t* childID);*/
 /*
    Returns the child node of n with identifier childID, if one exists,
    otherwise returns NULL.

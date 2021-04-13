@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* node.h                                                             */
-/* Author: Christopher Moretti                                        */
+/* Author: Alina Chen and Nickolas Casalinuovo                        */
 /*--------------------------------------------------------------------*/
 
 #ifndef NODE_INCLUDED
@@ -15,7 +15,8 @@
 */
 typedef struct node* Node_T;
 
-typedef enum {ISDIRECTORY, ISFILE} nodeType;
+
+
 /*
    Given a parent node and a directory string dir, returns a new
    Node_T or NULL if any allocation error occurs in creating
@@ -28,7 +29,6 @@ typedef enum {ISDIRECTORY, ISFILE} nodeType;
    to link to the new node.  The children links are initialized but
    do not point to any children.
 */
-
 Node_T Node_create(const char* newNode, Node_T parent, void* contents,
                    size_t length, nodeType type);
 

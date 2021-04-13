@@ -12,6 +12,8 @@
 #include "node.h"
 /* #include "checkerDT.h" */
 
+typedef enum {ISDIRECTORY, ISFILE} nodeType;
+
 /*
    A node structure represents a file or a directory in the tree
 */

@@ -5,7 +5,6 @@
 
 #include <assert.h>
 #include <string.h>
-#include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -141,7 +140,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
     return result;
 }
 
-static boolean contains(char *path, nodeType type){
+static boolean FT_contains(char *path, nodeType type){
     Node_T curr;
     boolean result = FALSE;
 
@@ -167,11 +166,11 @@ static boolean contains(char *path, nodeType type){
 }
 
 boolean FT_containsFile(char *path){
-    return contains(path, ISFILE);
+    return FT_contains(path, ISFILE);
 }
 
 boolean FT_containsDir(char *path) {
-    return contains(path, ISDIRECTORY);
+    return FT_contains(path, ISDIRECTORY);
 }
 
 int FT_destroy(void){

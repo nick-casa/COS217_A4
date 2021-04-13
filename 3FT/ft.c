@@ -64,7 +64,6 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
 }
 
 static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* contents, size_t length) {
-
     Node_T curr = parent;
     Node_T firstNew = NULL;
     Node_T new;

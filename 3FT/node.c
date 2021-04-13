@@ -322,15 +322,19 @@ int Node_linkChild(Node_T parent, Node_T child) {
       return PARENT_CHILD_ERROR;
    }
    child->parent = parent;
-   if(DynArray_bsearch(parent->dirChildren, child, &i,
-         (int (*)(const void*, const void*)) Node_compare) == 1) {
-      assertNodes(parent,child);
-      return ALREADY_IN_TREE;
+   if(child->type == ISDIRECTORY){
+       if(DynArray_bsearch(parent->dirChildren, child, &i,
+             (int (*)(const void*, const void*)) Node_compare) == 1) {
+          assertNodes(parent,child);
+          return ALREADY_IN_TREE;
+       }
    }
-   if(DynArray_bsearch(parent->fileChildren, child, &i,
-                        (int (*)(const void*, const void*)) Node_compare) == 1) {
-       assertNodes(parent,child);
-       return ALREADY_IN_TREE;
+   else if(child->type==ISFILE) {
+       if (DynArray_bsearch(parent->fileChildren, child, &i,
+                            (int (*)(const void *, const void *)) Node_compare) == 1) {
+           assertNodes(parent, child);
+           return ALREADY_IN_TREE;
+       }
    }
    /*check this*/
    if(parent->type == ISDIRECTORY){

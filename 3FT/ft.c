@@ -114,38 +114,46 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
 
     assert(path != NULL);
 
+    /* if current node is null */
     if(curr == NULL){
-        if(root != NULL) { return CONFLICTING_PATH;
-        }
-    }
+        if(root != NULL) return CONFLICTING_PATH;
 
+    }
+    /* if we have a valid curr */
     else {
-        if(!strcmp(path, Node_getPath(curr))) {
-            return ALREADY_IN_TREE;
-        }
+        /* check if already a path */
+        if(!strcmp(path, Node_getPath(curr))) return ALREADY_IN_TREE;
+        /* if path doesnt already exist find rest of path */
         restPath += (strlen(Node_getPath(curr)) + 1);
     }
     if(isFile(parent)) return NOT_A_DIRECTORY;
 
+    /* allocate memory for rest of path */
     copyPath = malloc(strlen(restPath)+1);
     if(copyPath == NULL)
         return MEMORY_ERROR;
     strcpy(copyPath, restPath);
     dirToken = strtok(copyPath, "/");
 
+    /* while there are directories to visit */
     while(dirToken != NULL) {
+        /* track next token */
         char* nextToken = strtok(NULL, "/");
+        /* insert last file node */
         if (type == ISFILE && nextToken == NULL){
             new = Node_create(dirToken, curr, contents, length, ISFILE);
         }
+        /* insert directory nodes */
         else{
             new = Node_create(dirToken, curr, NULL, 0, ISDIRECTORY);
         }
+        /* add to new count */
         newCount++;
 
         if(firstNew == NULL)
             firstNew = new;
         else {
+            /* if not the first new child, link */
             result = FT_linkParentToChild(curr, new);
             if(result != SUCCESS) {
                 (void) Node_destroy(new, getType(new));
@@ -155,6 +163,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
             }
         }
         if(new == NULL) {
+            /* if new was not created */
             (void) Node_destroy(firstNew, getType(firstNew));
             free(copyPath);
             return MEMORY_ERROR;
@@ -172,7 +181,7 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         count = newCount;
         return SUCCESS;
     }
-
+    /* link rest to parent */
     result = FT_linkParentToChild(parent, firstNew);
     if(result == SUCCESS)
         count += newCount;

@@ -147,7 +147,6 @@ size_t Node_destroy(Node_T n, nodeType type) {
        }
        DynArray_free(n->fileChildren);
    }
-   /* MIGHT NEED TO FIX THIS LATER!!!!!!!!! */
    free(n->path);
    free(n);
    count++;

@@ -240,7 +240,7 @@ int FT_rmDir(char *path){
     if(curr == NULL)
         result =  NO_SUCH_PATH;
     else
-        result = FT_rmPathAt(path, cur);
+        result = FT_rmPathAt(path, curr);
 
     /*assert(CheckerDT_isValid(isInitialized,root,count));*/
     return result;
@@ -276,7 +276,7 @@ int FT_insertFile(char *path, void *contents, size_t length){
 
     /* check this */
     /* maybe NOT_A_DIRECTORY */
-    if (strstr(copyPath,'/') != NULL) return CONFLICTING_PATH;
+    if (strstr(copyPath,"/") != NULL) return CONFLICTING_PATH;
 
     new = Node_create(copyPath, curr, contents, length, ISFILE);
     result = FT_linkParentToChild(curr, new);
@@ -341,7 +341,6 @@ void *FT_replaceFileContents(char *path, void *newContents, size_t newLength) {
 
 int FT_stat(char *path, boolean *type, size_t *length){
     Node_T curr;
-    void* result;
 
     if(!isInitialized) return INITIALIZATION_ERROR;
 

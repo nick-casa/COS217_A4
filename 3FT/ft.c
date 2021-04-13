@@ -152,6 +152,7 @@ static boolean contains(char *path, nodeType type){
     if(curr == NULL)
         result = FALSE;
     else if(strcmp(path, Node_getPath(curr)))
+        if(type==ISFILE && Node)
         result = FALSE;
     else{
         if(getType(curr) == type) result = TRUE;

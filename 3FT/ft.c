@@ -42,15 +42,20 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr) {
         return curr;
 
     else if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
+        /* Loop through all directory children */
         for(i = 0; i < Node_getNumDirChildren(curr); i++) {
+            /* Recur down directory children */
             found = FT_traversePathFrom(path,
                                         Node_getChildDirectory(curr, i));
-
+            /* If found, stop recursion */
             if(found != NULL) return found;
         }
+        /* Loop through all file children */
         for(i = 0; i < Node_getNumFileChildren(curr); i++) {
+            /* Recur down file children  */
             found = FT_traversePathFrom(path,
                                         Node_getChildFile(curr, i));
+            /* If found, stop recursion */
             if(found != NULL) return found;
         }
 
@@ -81,6 +86,9 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
 /*
    Inserts a new path into the tree rooted at parent, or, if
    parent is NULL, as the root of the data structure.
+
+   Finds rest of path depending on nodeType type
+   the arguments contents and length are carried down to create the end node
 
    If a node representing path already exists, returns ALREADY_IN_TREE
 

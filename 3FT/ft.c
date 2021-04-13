@@ -375,7 +375,7 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
     if(n != NULL) {
         (void) DynArray_set(d, i, Node_getPath(n));
         i++;
-        for(cFile = 0; cFile < Node_getNumFileChildren(n); a++){
+        for(cFile = 0; cFile < Node_getNumFileChildren(n); cFile++){
             file = Node_getChildFile(n, cFile);
             (void) DynArray_set(d, i, Node_getPath(file));
             i++;

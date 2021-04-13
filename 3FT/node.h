@@ -38,7 +38,7 @@ Node_T Node_create(const char* newNode, Node_T parent, void* contents,
 
   Returns the number of nodes destroyed.
 */
-size_t Node_destroy(Node_T n);
+size_t Node_destroy(Node_T n, nodeType type);
 
 
 /*

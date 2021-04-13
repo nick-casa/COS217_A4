@@ -353,7 +353,6 @@ int  Node_unlinkChild(Node_T parent, Node_T child) {
    if (child->type == ISDIRECTORY) {
        if (DynArray_bsearch(parent->dirChildren, child, &i,
                             (int (*)(const void *, const void *)) Node_compare) == 0) {
-           assertNodes(parent, child);
            return PARENT_CHILD_ERROR;
        }
    }
@@ -361,14 +360,12 @@ int  Node_unlinkChild(Node_T parent, Node_T child) {
    else {
        if (DynArray_bsearch(parent->fileChildren, child, &i,
                             (int (*)(const void *, const void *)) Node_compare) == 0) {
-           assertNodes(parent, child);
            return PARENT_CHILD_ERROR;
        }
    }
    if(child->type == ISFILE) (void) DynArray_removeAt(parent->fileChildren, i);
    else if(child->type == ISDIRECTORY) (void) DynArray_removeAt(parent->dirChildren, i);
 
-   assertNodes(parent,child);
    return SUCCESS;
 }
 

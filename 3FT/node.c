@@ -76,7 +76,7 @@ static char* Node_buildPath(Node_T n, const char* nodeName) {
 Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t length, nodeType type){
    Node_T new;
 
-   assert(parent == NULL /*|| CheckerDT_Node_isValid(parent)*/);
+    /*assert(parent == NULL || CheckerDT_Node_isValid(parent)*/);
    assert(nodeName != NULL);
 
    new = malloc(sizeof(struct node));

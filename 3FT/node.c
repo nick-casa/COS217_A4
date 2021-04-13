@@ -206,7 +206,7 @@ int Node_hasChildFile(Node_T n, const char* path, size_t* childID) {
    if(checker == NULL) {
       return -1;
    }
-   index = -1;
+   index = 0;
    result = DynArray_bsearch(n->fileChildren, checker, &index,
                                  (int (*)(const void*, const void*)) Node_compare);
 

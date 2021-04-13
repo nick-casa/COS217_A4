@@ -169,7 +169,7 @@ const char* Node_getPath(Node_T n) {
      node2 (b is a file): a/b/
      path names could be same but should return not equal
  */
- int Node_compare(Node_T node1, Node_T node2) {
+ static int Node_compare(Node_T node1, Node_T node2) {
    assert(node1 != NULL);
    assert(node2 != NULL);
 

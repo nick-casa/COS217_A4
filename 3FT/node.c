@@ -346,7 +346,7 @@ size_t getFileLength(Node_T n) {
 
 /* see node.h for specification */
 boolean isFile(Node_T n){
-    assert(n != NULL);
+    if(n == NULL) return FALSE;
     return (n->type == ISFILE);
 }
 

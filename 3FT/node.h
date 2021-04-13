@@ -138,7 +138,7 @@ size_t getFileLength(Node_T n);
 */
 boolean isFile(Node_T n);
 
-/* Replaces the file contents
+/* Replaces the file contents */
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength);
 
 nodeType getType(Node_T n);

@@ -176,7 +176,9 @@ int Node_hasChild(Node_T n, const char* path, size_t* childID) {
 
    if (n->type == ISFILE) return 0;
 
-   checker = Node_create(path, NULL);
+   checker = Node_create(path, NULL, NULL, 0, ISDIRECTORY);
+   /* checker = Node_create(path, NULL); */
+
    if(checker == NULL) {
       return -1;
    }
@@ -351,8 +353,8 @@ boolean isFile(Node_T n){
 void* replaceFileContents(Node_T n, void *newContents, size_t newLength) {
     void* oldContents;
     assert(n != NULL);
-    oldContents = pvContents;
-    pvContents = newContents;
-    uLength = newLength;
+    oldContents = n->pvContents;
+    n->pvContents = newContents;
+    n->uLength = newLength;
     return oldContents;
 }

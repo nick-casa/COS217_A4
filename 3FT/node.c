@@ -280,11 +280,6 @@ Node_T Node_getParent(Node_T n) {
    return n->parent;
 }
 
-
-static void assertNodes(Node_T nodeOne, Node_T nodeTwo){
-    /* assert(CheckerDT_Node_isValid(parent));
-    assert(CheckerDT_Node_isValid(child)); */
-}
 /* see node.h for specification */
 int Node_linkChild(Node_T parent, Node_T child) {
    size_t i;
@@ -292,48 +287,39 @@ int Node_linkChild(Node_T parent, Node_T child) {
 
    assert(parent != NULL);
    assert(child != NULL);
-   assertNodes(parent,child);
 
    if (parent->type == ISFILE) {
-       assertNodes(parent,child);
        return PARENT_CHILD_ERROR;
    }
 
    if(Node_hasChildDirectory(parent, child->path, NULL)) {
-      assertNodes(parent,child);
       return ALREADY_IN_TREE;
    }
    if(Node_hasChildFile(parent, child->path, NULL)) {
-       assertNodes(parent,child);
        return ALREADY_IN_TREE;
    }
    i = strlen(parent->path);
    if(strncmp(child->path, parent->path, i)) {
-      assertNodes(parent,child);
       return PARENT_CHILD_ERROR;
    }
    rest = child->path + i;
    if(strlen(child->path) >= i && rest[0] != '/') {
-      assertNodes(parent,child);
       return PARENT_CHILD_ERROR;
    }
    rest++;
    if(strstr(rest, "/") != NULL) {
-      assertNodes(parent,child);
       return PARENT_CHILD_ERROR;
    }
    child->parent = parent;
    if(child->type == ISDIRECTORY){
        if (DynArray_bsearch(parent->dirChildren, child, &i,
                             (int (*)(const void *, const void *)) Node_compare) == 1) {
-          assertNodes(parent,child);
           return ALREADY_IN_TREE;
        }
    }
    else if(child->type==ISFILE) {
        if (DynArray_bsearch(parent->fileChildren, child, &i,
                             (int (*)(const void *, const void *)) Node_compare) == 1) {
-           assertNodes(parent, child);
            return ALREADY_IN_TREE;
        }
    }
@@ -341,19 +327,16 @@ int Node_linkChild(Node_T parent, Node_T child) {
    if(parent->type == ISDIRECTORY){
        if(child->type == ISFILE){
            if(DynArray_addAt(parent->fileChildren, i, child) == TRUE) {
-              assertNodes(parent,child);
               return SUCCESS;
            }
        }
        else{
            if(DynArray_addAt(parent->dirChildren, i, child) == TRUE) {
-               assertNodes(parent,child);
                return SUCCESS;
            }
        }
    }
 
-   assertNodes(parent,child);
    return PARENT_CHILD_ERROR;
 
 }

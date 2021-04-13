@@ -344,7 +344,8 @@ int FT_stat(char *path, boolean *type, size_t *length){
     Node_T curr;
 
     if(!isInitialized) return INITIALIZATION_ERROR;
-
+    assert(type!=NULL);
+    assert(length!=NULL);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     assert(path != NULL);
 
@@ -395,6 +396,7 @@ static size_t FT_preOrderTraversal(Node_T n, DynArray_T d, size_t i) {
 */
 static void FT_strlenAccumulate(char* str, size_t* pAcc) {
     assert(pAcc != NULL);
+    assert(str != NULL);
 
     if(str != NULL)
         *pAcc += (strlen(str) + 1);
@@ -407,6 +409,7 @@ static void FT_strlenAccumulate(char* str, size_t* pAcc) {
 */
 static void FT_strcatAccumulate(char* str, char* acc) {
     assert(acc != NULL);
+    assert(str != NULL);
 
     if(str != NULL)
         strcat(acc, str); strcat(acc, "\n");

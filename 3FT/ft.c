@@ -52,7 +52,7 @@ static int FT_linkParentToChild(Node_T parent, Node_T child) {
     assert(parent != NULL);
 
     if(Node_linkChild(parent, child) != SUCCESS) {
-        (void) Node_destroy(child);
+        (void) Node_destroy(child, type);
         return PARENT_CHILD_ERROR;
     }
 
@@ -160,7 +160,10 @@ int FT_destroy(void){
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     if(!isInitialized)
         return INITIALIZATION_ERROR;
-    if(curr != NULL) count -= Node_destroy(curr);
+    if(curr != NULL) {
+        if(isFile(curr)) count -= Node_destroy(curr, ISFILE);
+        else count -= Node_destroy(curr, ISDIRECTORY);
+    }
     root = NULL;
     isInitialized = 0;
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */

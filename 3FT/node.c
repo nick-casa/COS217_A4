@@ -117,7 +117,7 @@ Node_T Node_create(const char* nodeName, Node_T parent, void* contents, size_t l
 }
 
 /* see node.h for specification */
-size_t Node_destroy(Node_T n) {
+size_t Node_destroy(Node_T n, nodeType type) {
    size_t i;
    size_t count = 0;
    Node_T c;

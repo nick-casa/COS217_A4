@@ -1,0 +1,155 @@
++break bdt_client.c:96
+Breakpoint 1 at 0x402ff0: file bdt_client.c, line 96.
++run
+Starting program: /u/ac63/A4/1BDT/bdtBad3 
+
+Breakpoint 1, main () at bdt_client.c:96
+/u/ac63/A4/1BDT/bdt_client.c:96:3937:beg:0x402ff0
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
++next
+/u/ac63/A4/1BDT/bdt_client.c:97:3951:beg:0x402ff8
++break BDT_rmPath
+Breakpoint 2 at 0x40236c: file bdtBad3.c, line 381.
++next
+
+Breakpoint 2, BDT_rmPath (path=0x403770 "a/b") at bdtBad3.c:381
+/u/cos217/Assignment4/bdtBad3.c:381:9457:beg:0x40236c
++break BDT_rmPathAt
+Breakpoint 3 at 0x4022a0: file bdtBad3.c, line 359.
++next
+/u/cos217/Assignment4/bdtBad3.c:383:9483:beg:0x402398
++n
+/u/cos217/Assignment4/bdtBad3.c:386:9541:beg:0x4023b4
++n
+/u/cos217/Assignment4/bdtBad3.c:387:9575:beg:0x4023c0
++n
+/u/cos217/Assignment4/bdtBad3.c:390:9623:beg:0x4023d4
++n
+
+Breakpoint 3, BDT_rmPathAt (path=0x403770 "a/b", curr=0x4300a0) at bdtBad3.c:359
+/u/cos217/Assignment4/bdtBad3.c:359:9008:beg:0x4022a0
++break BDT_unlinkParentToChild
+Breakpoint 4 at 0x401f0c: file bdtBad3.c, line 201.
++n
+/u/cos217/Assignment4/bdtBad3.c:360:9033:beg:0x4022cc
++n
+/u/cos217/Assignment4/bdtBad3.c:362:9059:beg:0x4022f8
++n
+/u/cos217/Assignment4/bdtBad3.c:364:9086:beg:0x402304
++n
+/u/cos217/Assignment4/bdtBad3.c:365:9144:beg:0x40231c
++n
+/u/cos217/Assignment4/bdtBad3.c:368:9202:beg:0x402338
++n
+
+Breakpoint 4, BDT_unlinkParentToChild (parent=0x430070, child=0x4300a0) at bdtBad3.c:201
+/u/cos217/Assignment4/bdtBad3.c:201:5417:beg:0x401f0c
++print parent->child1
+$1 = (Node_T) 0x4300a0
++print (char*)parent->child
+There is no member named child.
++print (char*)parent->child1
+$2 = 0x4300a0 "0"
++print (char*)parent->child2
+$3 = 0x430190 " \001C"
++print (char*)child
+$4 = 0x4300a0 "0"
++print child 
+$5 = (Node_T) 0x4300a0
++print (parent->child2) 
+$6 = (Node_T) 0x430190
++next
+/u/cos217/Assignment4/bdtBad3.c:203:5445:beg:0x401f38
++show logging
+Currently logging to "./bad3.log".
+Logs will be appended to the log file.
+Output is being logged and displayed.
++print (char*) parent->path
+$7 = 0x430010 "a"
++print (char*) child->path
+$8 = 0x430030 "a/b"
++print (char*) parent->child1->path
+$9 = 0x430030 "a/b"
++print (char*) parent->child2->path
+$10 = 0x430120 "a/y"
++next 
+/u/cos217/Assignment4/bdtBad3.c:204:5478:beg:0x401f4c
++quit
+A debugging session is active.
+
+	Inferior 1 [process 63157] will be killed.
+
+Quit anyway? (y or n) +set logging overwrite on
+warning: Currently logging to ./bad3.log.  Turn the logging off and on to make the new setting effective.
++run 
+Starting program: /u/ac63/A4/1BDT/bdtBad3 
+[Inferior 1 (process 63428) exited normally]
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
++break bdt_client.c:97
+Breakpoint 1 at 0x402ff8: file bdt_client.c, line 97.
++run
+Starting program: /u/ac63/A4/1BDT/bdtBa
+Breakpoint 1, main () at bdt_client.c:97
+/u/ac63/A4/1BDT/bdt_client.c:97:3951:beg:0x402ff8
++break BDT_rmPath
+Breakpoint 2 at 0x40236c: file bdtBad3.c, line 381.
++next
+
+Breakpoint 2, BDT_rmPath (path=0x403770 "a/b") at bdtBad3.c:381
+/u/cos217/Assignment4/bdtBad3.c:381:9457:beg:0x40236c
++break BDT_rmPathAt
+Breakpoint 3 at 0x4022a0: file bdtBad3.c, line 359.
++n
+/u/cos217/Assignment4/bdtBad3.c:383:9483:beg:0x402398
++next
+/u/cos217/Assignment4/bdtBad3.c:386:9541:beg:0x4023b4
++next
+/u/cos217/Assignment4/bdtBad3.c:387:9575:beg:0x4023c0
++n
+/u/cos217/Assignment4/bdtBad3.c:390:9623:beg:0x4023d4
++n
+
+Breakpoint 3, BDT_rmPathAt (path=0x403770 "a/b", curr=0x4300a0) at bdtBad3.c:359
+/u/cos217/Assignment4/bdtBad3.c:359:9008:beg:0x4022a0
++break BDT_unlinkParentToChild
+Breakpoint 4 at 0x401f0c: file bdtBad3.c, line 201.
++n
+/u/cos217/Assignment4/bdtBad3.c:360:9033:beg:0x4022cc
++n
+/u/cos217/Assignment4/bdtBad3.c:362:9059:beg:0x4022f8
++print path
+$1 = 0x403770 "a/b"
++print curr->path
+$2 = 0x430030 "a/b"
++next
+/u/cos217/Assignment4/bdtBad3.c:364:9086:beg:0x402304
++next
+/u/cos217/Assignment4/bdtBad3.c:365:9144:beg:0x40231c
++next
+/u/cos217/Assignment4/bdtBad3.c:368:9202:beg:0x402338
++next
+
+Breakpoint 4, BDT_unlinkParentToChild (parent=0x430070, child=0x4300a0) at bdtBad3.c:201
+/u/cos217/Assignment4/bdtBad3.c:201:5417:beg:0x401f0c
++n
+/u/cos217/Assignment4/bdtBad3.c:203:5445:beg:0x401f38
++print parent->child1->path 
+$3 = 0x430030 "a/b"
++print child->path
+$4 = 0x430030 "a/b"
++print parent->child2->path
+$5 = 0x430120 "a/y"
++next
+/u/cos217/Assignment4/bdtBad3.c:204:5478:beg:0x401f4c
++next
+/u/cos217/Assignment4/bdtBad3.c:212:5626:beg:0x401f80
++print parent->child1->path 
+Cannot access memory at address 0x0
++print parent->child2->path
+$6 = 0x430120 "a/y"
++quit
+A debugging session is active.
+
+	Inferior 1 [process 63432] will be killed.
+
+Quit anyway? (y or n) 

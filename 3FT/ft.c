@@ -39,10 +39,10 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr, nodeType type) {
                found = FT_traversePathFrom(path,
                                             Node_getChild(curr, i), type);
            }
-            else {
+           else { /*child is a file*/
                if (!strncmp(path, Node_getPath(Node_getChild(curr,i)), strlen(Node_getPath(Node_getChild(curr,i)))))
                   found = Node_getChild(curr, i);
-               else found = curr;
+               /*else found = curr;*/
                
             }
             if(found != NULL)
@@ -140,8 +140,9 @@ static int FT_insertRestOfPath(char* path, Node_T parent, nodeType type, void* c
         result = FT_linkParentToChild(parent, firstNew);
         if(result == SUCCESS)
             count += newCount;
-        else
+        /* else
             (void) Node_destroy(firstNew, getType(firstNew));
+        */    
     }
     return result;
 }

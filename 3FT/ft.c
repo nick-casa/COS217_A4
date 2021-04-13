@@ -262,7 +262,7 @@ int FT_insertFile(char *path, void *contents, size_t length){
     if (root == NULL) return CONFLICTING_PATH;
 
     curr = FT_traversePathFrom(path, root, ISFILE);
-    result = FT_insertRestOfPath(path, curr, ISFILE);
+    result = FT_insertRestOfPath(path, curr, ISFILE, contents, length);
     /* assert(CheckerDT_isValid(isInitialized,root,count)); */
     return result;
 }

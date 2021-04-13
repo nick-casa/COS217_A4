@@ -144,7 +144,6 @@ static boolean contains(char *path, nodeType type){
         return FALSE;
 
     curr = FT_traversePathFrom(path, root, type);
-
     if(curr == NULL)
         result = FALSE;
     else if(strcmp(path, Node_getPath(curr)))

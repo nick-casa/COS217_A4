@@ -38,5 +38,5 @@ nodeGood.o: nodeGood.c dynarray.h node.h a4def.h checkerDT.h
 dt%.o: dt%.c dynarray.h dt.h a4def.h node.h checkerDT.h
 	$(error "You can't re-build" $<)
 
-node%.o: node%.c dynarray.h node.h a4def.h checkerDT.h
+node%.o: node%.c dynarray.h a4def.h node.h checkerDT.h
 	$(error "You can't re-build" $<)

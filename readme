@@ -20,18 +20,15 @@ Student 1: What authorized sources of information did you use to
 complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
+
 The course's lectures.
-
 The course's precepts.
-
 The course's website.
-
-Documents that are referenced directly by the course's website. Such documents include the course's lecture slides and precept handouts.
-
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
 The course's textbooks.
 The course's current staff members outside of class time through office hours.
 The course's current staff members outside of class time through meetings.
-The course's current staff members outside of class time through Ed.
 The course's current staff members outside of class time through e-mail.
 Current lab teaching assistants through visits to the course labs.
 
@@ -42,7 +39,16 @@ complete the assignment? COPY THE LIST of authorized sources of
 information given in the "Policies" web page to this section of the
 readme file, and edit it as appropriate.
 
-
+The course's lectures.
+The course's precepts.
+The course's website.
+Documents that are referenced directly by the course's website.
+Such documents include the course's lecture slides and precept handouts.
+The course's textbooks.
+The course's current staff members outside of class time through office hours.
+The course's current staff members outside of class time through meetings.
+The course's current staff members outside of class time through e-mail.
+Current lab teaching assistants through visits to the course labs.
 
 ------------------------------------------------------------------------
 Student 1: What unauthorized sources of information did you use to
@@ -56,7 +62,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 2: What unauthorized sources of information did you use to
@@ -70,7 +76,7 @@ nature of the interaction, may additionally require the interaction
 being reported to the Committee on Discipline. Write "None" if you used
 no unauthorized sources of information.
 
-
+None
 
 ------------------------------------------------------------------------
 Student 1: What is your assessment of the assignment? Was it helpful?
@@ -82,7 +88,7 @@ Was it fun?
 Student 2: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+Very very long and painful but rewarding.
 
 ------------------------------------------------------------------------
 (optional) What information can you provide about your submission that
@@ -146,8 +152,6 @@ other three:
 
 The output when running the code is different than the output
 in gdb for bdtBad4.
-The letters in front correspond to the value of the pointer.
-We think it has something to do with remove
 
 
 For bdtBad5, you do not have to find the bug. Instead, indicate one

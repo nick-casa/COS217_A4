@@ -176,8 +176,9 @@ is different about trying to debug this executable in gdb versus the
 other three:
 
 The output when running the code is different than the output
-in gdb for bdtBad4.
-
+in gdb for bdtBad4. When running in terminal, the output changes
+each time we run bdtBad4. We think this has to do with writing over
+memory. However, in gdb ,the output stays the same.
 
 For bdtBad5, you do not have to find the bug. Instead, indicate one
 hypothesis for how the program could crash within the DynArray module,

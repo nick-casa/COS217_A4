@@ -103,7 +103,8 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
-
+None (all of splint errors were in supplied code nodeGood.c
+         and dynarray.c)
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on checkerDT.c, and what are your
@@ -115,6 +116,8 @@ write "None."
    checkerDT.c: line 134: low priority:
    This area is deeply nested at level 4, consider refactoring
 
+This piece of code is not grossly inefficient. The reason why there is
+the one extra level is because we have to keep track of the last child.
 
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are

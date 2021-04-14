@@ -1,52 +1,6 @@
-+break BDT_toString
 Breakpoint 1 at 0x402680: file bdtBad5.c, line 467.
 +run
 Starting program: /u/ac63/A4/1BDT/bdtBad5 
-
-Breakpoint 1, BDT_toString () at bdtBad5.c:467
-/u/cos217/Assignment4/bdtBad5.c:467:11679:beg:0x402680
-Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
-+next
-/u/cos217/Assignment4/bdtBad5.c:468:11730:beg:0x402688
-+next
-/u/cos217/Assignment4/bdtBad5.c:470:11755:beg:0x40268c
-+next
-/u/cos217/Assignment4/bdtBad5.c:471:11777:beg:0x4026a0
-+next
-/u/cos217/Assignment4/bdtBad5.c:491:12270:beg:0x40273c
-+set logging overwrite on
-warning: Currently logging to ./bad5.log.  Turn the logging off and on to make the new setting effective.
-+quit
-A debugging session is active.
-
-	Inferior 1 [process 67347] will be killed.
-
-Quit anyway? (y or n) +break BDT_toString
-Breakpoint 1 at 0x402680: file bdtBad5.c, line 467.
-+run
-Starting program: /u/ac63/A4/1BDT/bdtBad5 
-
-Breakpoint 1, BDT_toString () at bdtBad5.c:467
-/u/cos217/Assignment4/bdtBad5.c:467:11679:beg:0x402680
-Missing separate debuginfos, use: debuginfo-install glibc-2.17-222.sd7.aarch64
-+next
-/u/cos217/Assignment4/bdtBad5.c:468:11730:beg:0x402688
-+next
-/u/cos217/Assignment4/bdtBad5.c:470:11755:beg:0x40268c
-+print nodes->uPhysLength
-Cannot access memory at address 0x8
-+next
-/u/cos217/Assignment4/bdtBad5.c:471:11777:beg:0x4026a0
-+next
-/u/cos217/Assignment4/bdtBad5.c:491:12270:beg:0x40273c
-+next
-main () at bdt_client.c:29
-/u/ac63/A4/1BDT/bdt_client.c:29:1143:beg:0x4027e8
-+next
-/u/ac63/A4/1BDT/bdt_client.c:30:1176:beg:0x402814
-+next
-/u/ac63/A4/1BDT/bdt_client.c:31:1222:beg:0x402848
-+next
 
 Breakpoint 1, BDT_toString () at bdtBad5.c:467
 /u/cos217/Assignment4/bdtBad5.c:467:11679:beg:0x402680
@@ -58,10 +12,6 @@ Cannot access memory at address 0x8
 /u/cos217/Assignment4/bdtBad5.c:470:11755:beg:0x40268c
 +next
 /u/cos217/Assignment4/bdtBad5.c:473:11797:beg:0x4026a8
-+print root->uPhysLength
-There is no member named uPhysLength.
-+print root->physLength
-There is no member named physLength.
 +next
 /u/cos217/Assignment4/bdtBad5.c:474:11831:beg:0x4026c0
 +print nodes->uPhysLength

@@ -15,10 +15,8 @@
 */
 typedef struct node* Node_T;
 
-/*
-   nodeType is a binary enum which defines whether a node is a directory
-   or a file
-*/
+/* nodeType is a binary enum which defines whether a node
+ * is a directory or a file */
 typedef enum {ISDIRECTORY, ISFILE} nodeType;
 
 

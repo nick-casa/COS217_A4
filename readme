@@ -178,10 +178,14 @@ For bdtBad4, you do not have to find the bug. Instead, indicate what
 is different about trying to debug this executable in gdb versus the
 other three:
 
-The output when running the code is different than the output
-in gdb for bdtBad4. When running in terminal, the output changes
-each time we run bdtBad4. We think this has to do with writing over
-memory. However, in gdb ,the output stays the same.
+The output when running the code on terminal is different than the
+output in gdb for bdtBad4. When running in terminal, the output
+changes each time we run bdtBad4. We think this has to do with
+writing over memory. However, in gdb, the output stays the same.
+
+Debugging this is different than trying to debug the rest because
+the error is most spontaneous when outside the debugging
+environment.
 
 For bdtBad5, you do not have to find the bug. Instead, indicate one
 hypothesis for how the program could crash within the DynArray module,
@@ -217,7 +221,8 @@ DT_removePath from gets called in two different places within the code,
 but it can be replaced by the contents in one line:
 if(curr != NULL) count -= Node_destroy(curr);
 
-In nodeGood.c, should remove dead code above get_Path()
+In nodeGood.c, we should remove dead code above get_Path(). There are
+outdated functions left as comments.
 
 
 ------------------------------------------------------------------------

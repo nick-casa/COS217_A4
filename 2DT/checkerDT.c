@@ -86,12 +86,15 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    Returns FALSE if a broken invariant is found and
    returns TRUE otherwise.
 
+   Takes in a pointer to numNodes which it increments.
+
    You may want to change this function's return type or
    parameter list to facilitate constructing your checks.
    If you do, you should update this function comment.
 */
 static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
    size_t c;
+   assert(numNodes != NULL);
    (*numNodes)++;
    if(n != NULL) {
 
@@ -113,15 +116,9 @@ static boolean CheckerDT_treeCheck(Node_T n, size_t *numNodes) {
           Node_T child = Node_getChild(n, c);
 
 
-          /* if(Node_getParent(child)==NULL){
-              fprintf(stderr, "Node is hanging");
-              return FALSE;
-          } */
-          if (Node_getNumChildren(n) >= 1){
-              if(Node_getChild(n, 0) == NULL){
+          if (Node_getNumChildren(n) >= 1 && Node_getChild(n, 0) == NULL){
                   fprintf(stderr, "Child at wrong location. \n");
                   return FALSE;
-              }
           }
 
           if(strcmp(Node_getPath(n),Node_getPath(Node_getParent(child)))){
@@ -171,11 +168,14 @@ boolean CheckerDT_isValid(boolean isInit, Node_T root, size_t count) {
 
     /* Check on when DT is in an initialized state */
     if (isInit) {
+        /* if the root does not equal null */
         if (root != NULL){
+            /* but the count equals 0 */
             if (count == 0) {
                 fprintf(stderr, "Initialized, has a node but count is 0\n");
                 return FALSE;
             }
+            /* or the parent of the root is not null */
             if(Node_getParent(root) != NULL){
                 fprintf(stderr, "Parent of root is not null.\n");
                 return FALSE;

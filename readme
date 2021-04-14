@@ -82,7 +82,7 @@ None
 Student 1: What is your assessment of the assignment? Was it helpful?
 Was it fun?
 
-
+Agree with student 2.
 
 ------------------------------------------------------------------------
 Student 2: What is your assessment of the assignment? Was it helpful?
@@ -119,7 +119,8 @@ your disagreements with them? Copy the splint warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
-
+    None (all of splint errors were in supplied code ft_client.c
+    and dynarray.c)
 
 ------------------------------------------------------------------------
 What warnings does critTer generate on your Part 3 code, and what are
@@ -127,6 +128,27 @@ your disagreements with them? Copy the critTer warnings here, and
 express your disagreement after each warning. If there are no
 warnings, then write "None."
 
+ft.c: line 475: low priority:
+   A file should contain no more than 15 functions;
+   this file contains 20 functions
+We based our design off of dtGood.c and adapted the static
+functions used in that implementation. We got rid of a function
+we didn't think was necessary based on part 2.5. Also, the header file
+given to us (ft.h) already has 12 functions.
+
+ft.c: line 105: medium priority:
+   Do you want to validate 'contents' through an assert?
+ft.c: line 312: medium priority:
+   Do you want to validate 'contents' through an assert?
+ft.c: line 359: medium priority:
+   Do you want to validate 'newContents' through an assert?
+Since contents and newContents can be passed NULL, it is important
+that we do not validate them through an assert.
+
+node.h: line 20: high priority:
+   A comment should appear above each global variable.
+critTer must be malfunctioning here because we have a comment above the
+global variable that it is referencing.
 
 
 ------------------------------------------------------------------------

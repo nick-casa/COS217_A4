@@ -38,10 +38,10 @@ static Node_T FT_traversePathFrom(char* path, Node_T curr) {
     if(curr == NULL)
         return NULL;
 
-    else if(!strcmp(path,Node_getPath(curr)))
+    if(!strcmp(path,Node_getPath(curr)))
         return curr;
 
-    else if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
+    if(!strncmp(path, Node_getPath(curr), strlen(Node_getPath(curr)))) {
         /* Loop through all directory children */
         for(i = 0; i < Node_getNumDirChildren(curr); i++) {
             /* Recur down directory children */

@@ -20,7 +20,7 @@ boolean CheckerDT_Node_isValid(Node_T n) {
    size_t c;
    boolean found = FALSE;
 
-   /* Sample check: a NULL pointer is not a valid node */
+   /* Sample check: a ./NULL pointer is not a valid node */
    if(n == NULL) {
       fprintf(stderr, "A node is a NULL pointer\n");
       return FALSE;

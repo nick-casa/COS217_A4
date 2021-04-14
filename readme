@@ -112,6 +112,9 @@ your disagreement after each warning. If there are no warnings, then
 write "None."
 
 
+   checkerDT.c: line 134: low priority:
+   This area is deeply nested at level 4, consider refactoring
+
 
 ------------------------------------------------------------------------
 What warnings does splint generate on your Part 3 code, and what are
